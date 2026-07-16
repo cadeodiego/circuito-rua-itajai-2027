@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Circuito de Rua de Itajaí — Dossiê Técnico de Viabilidade</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0A1A2F; --ink-2:#12283F;
+    --signal:#0B5FFF; --signal-dk:#0846C4; --signal-lt:#5B9BFF;
+    --steel:#5B7089; --steel-lt:#B7C6DA;
+    --rule:#D5DFEA; --rule-dk:#25405E;
+    --drafting:#F2F6FB; --white:#FFFFFF;
+    --amber:#B26B00; --amber-bg:#FDF2DF;
+    --green:#0E7A5F; --green-bg:#E2F3ED;
+    --red:#C0392B; --red-bg:#FBE9E7;
+    /* heat map */
+    --h1:#1E8A5F; --h2:#7FB03A; --h3:#E8B303; --h4:#E07B23; --h5:#C0392B;
+    --maxw:1140px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--drafting);color:var(--ink);font-family:"Barlow",system-ui,sans-serif;font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,h4{font-family:"Barlow Condensed",sans-serif;margin:0;line-height:1.02;letter-spacing:.005em;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 30px;}
+  a{color:var(--signal);text-decoration:none;border-bottom:1px solid rgba(11,95,255,.28);}
+  a:hover{border-bottom-color:var(--signal);}
+  a:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:2px;}
+
+  /* ─────── COVER ─────── */
+  .cover{background:var(--ink);color:var(--white);padding:56px 0 0;}
+  .cover .kicker{font-family:"IBM Plex Mono";font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--signal-lt);display:flex;align-items:center;gap:12px;}
+  .cover .kicker::after{content:"";flex:1;height:1px;background:var(--rule-dk);}
+  .cover h1{font-weight:800;font-size:clamp(2.6rem,7vw,5.4rem);text-transform:uppercase;margin-top:20px;max-width:15ch;letter-spacing:-.01em;color:var(--white);}
+  .cover h1 span{color:var(--signal-lt);}
+  .cover .sub{margin-top:20px;max-width:58ch;font-size:1.08rem;color:var(--steel-lt);line-height:1.55;}
+  footer .sig{border-top:1px solid var(--rule-dk);padding-top:16px;margin-top:16px;}
+  footer .sig .role{font-family:"IBM Plex Mono";font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:#6E86A3;margin-bottom:6px;}
+  footer .sig .who{font-family:"Barlow Condensed";font-weight:800;font-size:1.15rem;text-transform:uppercase;color:var(--white);letter-spacing:.02em;}
+  footer .sig .what{font-size:.8rem;color:#8FA3BC;}
+  footer .sig .contact{margin-top:7px;display:flex;flex-wrap:wrap;gap:6px 16px;}
+  footer .sig .contact a{font-family:"IBM Plex Mono";font-size:.74rem;color:var(--signal-lt);border-bottom-color:rgba(91,155,255,.3);}
+  .ctrl{margin-top:44px;border-top:1px solid var(--rule-dk);display:grid;grid-template-columns:repeat(5,1fr);}
+  .ctrl > div{padding:18px 20px 26px 0;border-right:1px solid var(--rule-dk);}
+  .ctrl > div:last-child{border-right:none;}
+  .ctrl dt{font-family:"IBM Plex Mono";font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#6E86A3;margin-bottom:7px;}
+  .ctrl dd{margin:0;font-family:"Barlow Condensed";font-weight:700;font-size:1.02rem;color:var(--white);text-transform:uppercase;letter-spacing:.02em;}
+  .ctrl dd.on{color:var(--signal-lt);}
+
+  /* ─────── SECTIONS ─────── */
+  .sec{padding:64px 0;border-bottom:1px solid var(--rule);background:var(--drafting);color:var(--ink);}
+  .sec.tone{background:var(--white);}
+  .sec.dark{background:var(--ink);border-bottom:none;}
+  .sec.dark > .wrap > .hd h2{color:var(--white);}
+  .sec.dark > .wrap > .lead{color:var(--steel-lt);}
+  .hd{display:flex;gap:22px;align-items:baseline;margin-bottom:10px;}
+  .hd .no{font-family:"IBM Plex Mono";font-weight:600;font-size:.8rem;color:var(--signal);letter-spacing:.06em;padding-top:5px;white-space:nowrap;}
+  .sec.dark .hd .no{color:var(--signal-lt);}
+  h2{font-weight:700;font-size:clamp(1.6rem,3.4vw,2.35rem);text-transform:uppercase;color:var(--ink);}
+  .lead{max-width:76ch;color:var(--steel);font-size:1.02rem;margin:14px 0 34px 0;}
+
+  /* ─────── FIGURES ─────── */
+  .figs{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--rule);background:var(--white);}
+  .fig{padding:24px 22px;border-right:1px solid var(--rule);background:var(--white);}
+  .fig:last-child{border-right:none;}
+  .fig .v{font-family:"Barlow Condensed";font-weight:800;font-size:2.4rem;line-height:1;color:var(--ink);}
+  .fig .v em{font-style:normal;color:var(--signal);}
+  .fig .l{margin-top:9px;font-size:.86rem;color:var(--steel);line-height:1.4;}
+  .fig .n{margin-top:8px;font-family:"IBM Plex Mono";font-size:.68rem;color:var(--steel);opacity:.8;}
+
+  /* ─────── TABLES ─────── */
+  .tw{overflow-x:auto;border:1px solid var(--rule);background:var(--white);}
+  .sec.dark .tw{border-color:var(--rule-dk);}
+  .tw table{border-collapse:collapse;width:100%;min-width:680px;font-size:.9rem;background:var(--white);color:var(--ink);}
+  .tw thead th{background:var(--ink);color:var(--white);text-align:left;padding:12px 15px;font-family:"IBM Plex Mono";font-weight:500;font-size:.66rem;letter-spacing:.11em;text-transform:uppercase;white-space:nowrap;border-bottom:2px solid var(--signal);}
+  .tw tbody td{padding:13px 15px;border-bottom:1px solid var(--rule);vertical-align:top;background:var(--white);color:var(--ink);}
+  .tw tbody tr:nth-child(even) td{background:var(--drafting);}
+  .tw tbody tr:last-child td{border-bottom:none;}
+  .tw td.nm{font-family:"Barlow Condensed";font-weight:700;font-size:1.05rem;color:var(--ink);text-transform:uppercase;letter-spacing:.01em;}
+  .tw td.nm small{display:block;font-family:"IBM Plex Mono";font-size:.66rem;font-weight:400;color:var(--steel);text-transform:none;letter-spacing:0;margin-top:3px;}
+  .tw td.d{font-family:"IBM Plex Mono";font-size:.82rem;white-space:nowrap;font-weight:500;color:var(--ink);}
+  .tw td.d.hi{color:var(--signal-dk);font-weight:600;}
+  .tw td.d.neg{color:var(--red);font-weight:600;}
+  .tw td.d.pos{color:var(--green);font-weight:600;}
+  .tw td .sm{font-size:.68rem;color:var(--steel);display:block;font-family:"Barlow";white-space:normal;}
+  .ref{font-family:"IBM Plex Mono";font-size:.7rem;color:var(--steel);}
+  .tw tr.mark td{background:#E7F0FF!important;color:var(--ink);}
+  .tw tfoot td{font-family:"Barlow Condensed";font-weight:700;font-size:1.05rem;text-transform:uppercase;background:var(--ink);color:var(--white);border-top:2px solid var(--signal);padding:14px 15px;}
+  .tw tfoot td.d{font-family:"IBM Plex Mono";font-size:.9rem;color:var(--signal-lt);text-transform:none;font-weight:600;}
+  .tw tfoot td.d.mut{color:var(--steel-lt);}
+  .tw table.mny td:last-child,.tw table.mny th:last-child{text-align:right;}
+
+  /* ─────── PHASES ─────── */
+  .ph{border:1px solid var(--rule);background:var(--white);}
+  .phhead{display:grid;grid-template-columns:74px 1fr 132px 112px;background:var(--ink);}
+  .phhead span{padding:11px 15px;font-family:"IBM Plex Mono";font-size:.64rem;letter-spacing:.11em;text-transform:uppercase;color:var(--white);}
+  .phhead span + span{border-left:1px solid var(--rule-dk);}
+  .phr{display:grid;grid-template-columns:74px 1fr 132px 112px;border-bottom:1px solid var(--rule);background:var(--white);}
+  .phr:last-child{border-bottom:none;}
+  .phr .tag{background:var(--ink-2);color:var(--signal-lt);font-family:"IBM Plex Mono";font-weight:600;font-size:.86rem;display:flex;align-items:center;justify-content:center;letter-spacing:.04em;}
+  .phr.own .tag{background:var(--signal);color:var(--white);}
+  .phr .bd{padding:18px 20px;background:var(--white);}
+  .phr .bd h3{font-size:1.16rem;font-weight:700;text-transform:uppercase;color:var(--ink);}
+  .phr .bd p{margin:6px 0 0;font-size:.88rem;color:var(--steel);}
+  .phr .bd p strong{color:var(--ink);}
+  .phr .cost,.phr .dur{padding:18px 16px;font-family:"IBM Plex Mono";font-size:.82rem;background:var(--white);border-left:1px solid var(--rule);display:flex;align-items:center;font-weight:500;}
+  .phr .cost{color:var(--ink);font-weight:600;}
+  .phr .dur{color:var(--steel);font-size:.76rem;}
+
+  /* ─────── BLOCKS / CARDS ─────── */
+  .blocks{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
+  .blk{background:var(--white);border:1px solid var(--rule);border-top:3px solid var(--steel);padding:22px;color:var(--ink);}
+  .blk.p{border-top-color:var(--signal);}
+  .blk.m{border-top-color:var(--amber);}
+  .blk.e{border-top-color:var(--green);}
+  .blk .who{font-family:"IBM Plex Mono";font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--steel);}
+  .blk h3{font-size:1.2rem;font-weight:700;text-transform:uppercase;margin:7px 0 4px;color:var(--ink);}
+  .blk .tot{font-family:"Barlow Condensed";font-weight:800;font-size:1.85rem;color:var(--ink);line-height:1;margin-bottom:14px;}
+  .blk.p .tot{color:var(--signal);}
+  .blk ul{list-style:none;padding:0;margin:0;}
+  .blk li{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px dotted var(--rule);font-size:.85rem;color:var(--ink);}
+  .blk li:last-child{border-bottom:none;}
+  .blk li span:last-child{font-family:"IBM Plex Mono";font-size:.78rem;white-space:nowrap;color:var(--ink);font-weight:500;}
+  .blk .fine{margin-top:14px;font-size:.79rem;color:var(--steel);line-height:1.45;}
+
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .cards.tri{grid-template-columns:1fr 1fr 1fr;}
+  .card{background:var(--white);border:1px solid var(--rule);padding:22px;color:var(--ink);}
+  .card .n{font-family:"IBM Plex Mono";font-size:.66rem;color:var(--signal);letter-spacing:.12em;text-transform:uppercase;}
+  .card h3{font-size:1.14rem;font-weight:700;text-transform:uppercase;margin:8px 0 6px;color:var(--ink);}
+  .card p{margin:0;font-size:.87rem;color:var(--steel);}
+  .card p b{color:var(--ink);}
+  .card .metric{font-family:"Barlow Condensed";font-weight:800;font-size:1.7rem;color:var(--signal);line-height:1;margin:4px 0 8px;}
+  .sec.dark .card{background:var(--ink-2);border-color:var(--rule-dk);}
+  .sec.dark .card h3{color:var(--white);}
+  .sec.dark .card p{color:var(--steel-lt);}
+  .sec.dark .card p b{color:var(--white);}
+  .sec.dark .card .n{color:var(--signal-lt);}
+  .sec.dark .card .metric{color:var(--signal-lt);}
+
+  /* ─────── CORRIDOR ─────── */
+  .corr{background:var(--ink-2);border:1px solid var(--rule-dk);padding:26px;display:grid;grid-template-columns:1fr;gap:26px;}
+  .corr .specs{columns:2;column-gap:32px;}
+  @media(max-width:760px){.corr .specs{columns:1;}}
+  .corr svg{width:100%;height:auto;display:block;}
+  .corr .specs{display:grid;}
+  .corr .sp{display:flex;justify-content:space-between;gap:14px;padding:11px 0;border-bottom:1px solid var(--rule-dk);}
+  .corr .sp:last-child{border-bottom:none;}
+  .corr .sp span:first-child{color:var(--steel-lt);font-size:.88rem;}
+  .corr .sp span:last-child{font-family:"IBM Plex Mono";font-size:.8rem;color:var(--white);font-weight:500;white-space:nowrap;}
+  .corr .sp span:last-child.on{color:var(--signal-lt);}
+  .corr .sp span:last-child.tbd{color:#8FA3BC;font-style:italic;}
+
+  /* ─────── NOTES ─────── */
+  .note{border-left:3px solid var(--signal);background:var(--white);border-top:1px solid var(--rule);border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:20px 24px;margin-top:26px;font-size:.9rem;color:var(--steel);}
+  .note b{color:var(--ink);}
+  .note .lbl{font-family:"IBM Plex Mono";font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);display:block;margin-bottom:8px;}
+  .note.warn{border-left-color:var(--amber);}
+  .note.warn .lbl{color:var(--amber);}
+  .sec.dark .note{background:var(--ink-2);border-color:var(--rule-dk);border-left-color:var(--signal-lt);color:var(--steel-lt);}
+  .sec.dark .note b{color:var(--white);}
+  .sec.dark .note .lbl{color:var(--signal-lt);}
+  .sec.dark .note.warn{border-left-color:var(--amber);}
+  .sec.dark .note.warn .lbl{color:#E8B563;}
+
+  /* ─────── CALCULATOR ─────── */
+  .calc{display:grid;grid-template-columns:340px 1fr;gap:20px;align-items:start;}
+  .inputs{background:var(--ink-2);border:1px solid var(--rule-dk);padding:22px;}
+  .inputs h3{font-family:"IBM Plex Mono";font-weight:600;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--signal-lt);margin-bottom:4px;}
+  .inputs .grp{margin-bottom:22px;}
+  .inputs .grp:last-of-type{margin-bottom:0;}
+  .irow{display:grid;grid-template-columns:1fr 92px;gap:10px;align-items:center;padding:7px 0;border-bottom:1px solid rgba(37,64,94,.6);}
+  .irow:last-child{border-bottom:none;}
+  .irow label{font-size:.84rem;color:var(--steel-lt);line-height:1.3;}
+  .irow label small{display:block;font-family:"IBM Plex Mono";font-size:.62rem;color:#6E86A3;}
+  .irow input[type=number]{width:100%;background:var(--ink);border:1px solid var(--rule-dk);color:var(--white);font-family:"IBM Plex Mono";font-size:.86rem;font-weight:600;padding:7px 9px;border-radius:3px;text-align:right;}
+  .irow input[type=number]:focus{outline:2px solid var(--signal);outline-offset:1px;border-color:var(--signal);}
+  .toggles{display:grid;gap:8px;margin-top:12px;}
+  .tg{display:flex;align-items:center;gap:10px;font-size:.82rem;color:var(--steel-lt);cursor:pointer;}
+  .tg input{width:16px;height:16px;accent-color:var(--signal);cursor:pointer;flex-shrink:0;}
+  .tg:hover{color:var(--white);}
+  .resetbtn{margin-top:18px;width:100%;background:transparent;border:1px solid var(--rule-dk);color:var(--steel-lt);font-family:"IBM Plex Mono";font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;padding:10px;border-radius:3px;cursor:pointer;}
+  .resetbtn:hover{border-color:var(--signal);color:var(--signal-lt);}
+  .resetbtn:focus-visible{outline:2px solid var(--signal);outline-offset:2px;}
+
+  .outputs{display:grid;gap:16px;}
+  .ocards{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--rule-dk);background:var(--ink-2);}
+  .oc{padding:18px 16px;border-right:1px solid var(--rule-dk);}
+  .oc:last-child{border-right:none;}
+  .oc .k{font-family:"IBM Plex Mono";font-size:.6rem;letter-spacing:.11em;text-transform:uppercase;color:#6E86A3;}
+  .oc .v{font-family:"Barlow Condensed";font-weight:800;font-size:1.7rem;line-height:1;color:var(--signal-lt);margin-top:8px;}
+  .oc .v.warnv{color:#E8B563;}
+  .oc .s{font-size:.72rem;color:var(--steel-lt);margin-top:6px;line-height:1.3;}
+  .chartbox{background:var(--ink-2);border:1px solid var(--rule-dk);padding:24px;}
+  .chartbox svg{width:100%;height:auto;display:block;}
+  .tabs{display:flex;gap:0;margin-bottom:18px;border:1px solid var(--rule-dk);border-radius:3px;overflow:hidden;width:fit-content;}
+  .tabs button{background:transparent;border:none;color:var(--steel-lt);font-family:"IBM Plex Mono";font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;padding:9px 16px;cursor:pointer;}
+  .tabs button + button{border-left:1px solid var(--rule-dk);}
+  .tabs button[aria-selected="true"]{background:var(--signal);color:var(--white);}
+  .tabs button:focus-visible{outline:2px solid var(--signal-lt);outline-offset:-2px;}
+  .legend{display:flex;gap:24px;margin-top:18px;flex-wrap:wrap;padding-top:16px;border-top:1px solid var(--rule-dk);}
+  .legend div{display:flex;align-items:center;gap:9px;font-family:"IBM Plex Mono";font-size:.72rem;color:var(--steel-lt);}
+  .legend i{width:22px;height:3px;display:block;flex-shrink:0;}
+
+  /* ─────── RISK MATRIX ─────── */
+  .rmx{display:grid;grid-template-columns:460px 1fr;gap:22px;align-items:start;}
+  .heat{background:var(--ink-2);border:1px solid var(--rule-dk);padding:22px;}
+  .heat svg{width:100%;height:auto;display:block;}
+  .heat .hleg{display:flex;flex-wrap:wrap;gap:16px;margin-top:18px;padding-top:16px;border-top:1px solid var(--rule-dk);}
+  .heat .hleg div{display:flex;align-items:center;gap:8px;font-family:"IBM Plex Mono";font-size:.68rem;color:var(--steel-lt);}
+  .heat .hleg i{width:12px;height:12px;display:block;border-radius:2px;flex-shrink:0;}
+  .heat .hleg i.op{border-radius:50%;background:var(--signal-lt);}
+  .heat .hint{margin-top:12px;font-family:"IBM Plex Mono";font-size:.64rem;color:#6E86A3;}
+  .rdot{cursor:pointer;}
+  .rdot:focus{outline:none;}
+
+  .rlist{display:grid;gap:10px;}
+  .ritem{background:var(--white);border:1px solid var(--rule);border-left:4px solid var(--steel);padding:16px 18px;cursor:pointer;}
+  .ritem:hover{border-color:var(--signal-lt);}
+  .ritem.on{border-color:var(--signal);border-left-width:4px;box-shadow:0 0 0 2px rgba(11,95,255,.18);}
+  .ritem.lv5{border-left-color:var(--h5);}
+  .ritem.lv4{border-left-color:var(--h4);}
+  .ritem.lv3{border-left-color:var(--h3);}
+  .ritem.lv2{border-left-color:var(--h2);}
+  .ritem.op{border-left-color:var(--signal);}
+  .ritem .rh{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .ritem .code{font-family:"IBM Plex Mono";font-size:.68rem;font-weight:600;color:var(--white);background:var(--ink);padding:3px 7px;border-radius:2px;}
+  .ritem.op .code{background:var(--signal);}
+  .ritem h3{font-size:1.02rem;font-weight:700;text-transform:uppercase;color:var(--ink);}
+  .ritem .sev{font-family:"IBM Plex Mono";font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;padding:3px 7px;border-radius:2px;font-weight:600;margin-left:auto;}
+  .sev.s5{background:var(--red-bg);color:var(--red);}
+  .sev.s4{background:#FCEBDD;color:#A6541A;}
+  .sev.s3{background:var(--amber-bg);color:var(--amber);}
+  .sev.s2{background:var(--green-bg);color:var(--green);}
+  .sev.sop{background:#E7F0FF;color:var(--signal-dk);}
+  .ritem .body{display:none;margin-top:10px;}
+  .ritem.on .body{display:block;}
+  .ritem .body p{margin:0 0 6px;font-size:.86rem;color:var(--steel);}
+  .ritem .body p:last-child{margin-bottom:0;}
+  .ritem .body p b{color:var(--ink);}
+  .ritem .meta{font-family:"IBM Plex Mono";font-size:.64rem;color:var(--steel);margin-top:8px;}
+
+  /* ─────── REFS ─────── */
+  .refs{border:1px solid var(--rule);background:var(--white);}
+  .refr{display:grid;grid-template-columns:52px 1fr;border-bottom:1px solid var(--rule);background:var(--white);}
+  .refr:last-child{border-bottom:none;}
+  .refr .i{font-family:"IBM Plex Mono";font-size:.74rem;color:var(--signal);font-weight:600;display:flex;align-items:flex-start;justify-content:center;padding-top:15px;border-right:1px solid var(--rule);background:var(--drafting);}
+  .refr .c{padding:13px 18px;font-size:.85rem;color:var(--ink);}
+  .refr .c .src{color:var(--ink);font-weight:600;}
+  .refr .c .what{color:var(--steel);display:block;font-size:.8rem;margin-top:2px;}
+  .refr .c a{font-family:"IBM Plex Mono";font-size:.72rem;word-break:break-all;display:inline-block;margin-top:5px;}
+
+  footer{background:var(--ink);color:#6E86A3;padding:44px 0;font-size:.82rem;}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:26px;justify-content:space-between;}
+  footer b{color:var(--white);font-family:"Barlow Condensed";font-weight:700;text-transform:uppercase;letter-spacing:.04em;}
+  footer .dis{max-width:58ch;line-height:1.65;}
+
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}*{transition:none!important;}}
+  @media(max-width:1040px){ .rmx{grid-template-columns:1fr;} }
+  @media(max-width:980px){ .calc{grid-template-columns:1fr;} .corr{grid-template-columns:1fr;gap:22px;} .ocards{grid-template-columns:1fr 1fr;} }
+  @media(max-width:900px){
+    .blocks,.cards,.cards.tri,.figs{grid-template-columns:1fr;}
+    .fig{border-right:none;border-bottom:1px solid var(--rule);}
+    .fig:last-child{border-bottom:none;}
+    .oc{border-right:none;border-bottom:1px solid var(--rule-dk);}
+    .ctrl{grid-template-columns:1fr 1fr;}
+    .ctrl > div{border-right:none;border-bottom:1px solid var(--rule-dk);}
+    .phr,.phhead{grid-template-columns:56px 1fr;}
+    .phr .cost,.phr .dur{border-left:none;border-top:1px dotted var(--rule);grid-column:2;padding:8px 20px;}
+    .phhead span:nth-child(3),.phhead span:nth-child(4){display:none;}
+    .hd{flex-direction:column;gap:4px;}
+    .ritem .body{display:block;}
+    .ritem .sev{margin-left:0;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ COVER ═══ -->
+<header class="cover">
+  <div class="wrap">
+    <div class="kicker">Dossiê técnico de viabilidade · Iniciativa privada</div>
+    <h1>Circuito de rua de <span>Itajaí</span></h1>
+    <p class="sub">Corredor da Beira-Rio, benchmark, fases de desenvolvimento, kit de segurança, modelo de receita e calculadora de cenários. Documento de trabalho para alinhamento entre sócios e prospecção de parceiros.</p>
+
+    <dl class="ctrl">
+      <div><dt>Referência</dt><dd>CIR-ITJ-001</dd></div>
+      <div><dt>Revisão</dt><dd>R2 · Preliminar</dd></div>
+      <div><dt>Natureza</dt><dd class="on">Privada</dd></div>
+      <div><dt>Janela alvo</dt><dd class="on">2S/2027 – 1S/2028</dd></div>
+      <div><dt>Base</dt><dd>Benchmark público</dd></div>
+    </dl>
+  </div>
+</header>
+
+<!-- ═══ 1.0 ═══ -->
+<section class="sec tone">
+  <div class="wrap">
+    <div class="hd"><div class="no">1.0</div><h2>Sumário executivo</h2></div>
+    <p class="lead">A tese não é sediar uma corrida. É implantar um circuito homologado que receba várias categorias por ano — com o kit de segurança como patrimônio da operação privada e o pavimento como legado urbano da cidade. A Stock Car é a porta de entrada natural; o calendário se amplia depois. O precedente existe e é recente: São Paulo tratou o circuito de rua do Anhembi como infraestrutura a ser diluída em contrato de cinco anos, e reutilizou equipamento de segurança comprado uma década antes.</p>
+
+    <div class="figs">
+      <div class="fig">
+        <div class="v">R$ <em>9–19</em> mi</div>
+        <div class="l">Capex privado — projeto, kit de segurança e infra de apoio</div>
+        <div class="n">§6.0 · §10.0</div>
+      </div>
+      <div class="fig">
+        <div class="v">R$ <em>6–11</em> mi</div>
+        <div class="l">Custo recorrente por competição, operando com kit próprio</div>
+        <div class="n">§7.0</div>
+      </div>
+      <div class="fig">
+        <div class="v"><em>18</em> meses</div>
+        <div class="l">Da sondagem à primeira largada. Janela alvo: 2S/2027 ou 1S/2028</div>
+        <div class="n">§5.0</div>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="lbl">Nota técnica · Como ler os números</span>
+      Todos os valores atribuídos a Itajaí são <b>estimativas de planejamento derivadas do benchmark público</b> das seções 3.0 e 4.0. Não substituem sondagem de mercado, orçamento de fornecedor nem projeto executivo. Os dados de São Paulo, Belo Horizonte, Salvador, Ribeirão Preto e Interlagos são reais e estão referenciados individualmente na seção 16.0. A <b>calculadora da seção 9.0</b> permite substituir cada premissa por número real conforme as cotações chegarem.
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 2.0 — CORREDOR ═══ -->
+<section class="sec dark">
+  <div class="wrap">
+    <div class="hd"><div class="no">2.0</div><h2>O corredor da Beira-Rio</h2></div>
+    <p class="lead">Circuito de rua não se inventa: se descobre. O que existe em Itajaí é uma condição que nenhum outro circuito urbano brasileiro teve — <b style="color:var(--white)">cerca de 950 m de via reta e plana correndo colada à água</b>, com toda a margem aberta e disponível para setorização. Rio, embarcações, área premium e arquibancada não competem entre si: compõem o mesmo produto. <b style="color:var(--white)">Esta seção apresenta o corredor, não o traçado</b> — o circuito fechado e a via de retorno são objeto do projeto geométrico (F2).</p>
+
+    <div class="corr">
+      <svg viewBox="0 0 760 300" role="img" aria-label="Esquema em perfil do corredor da Beira-Rio: rio com embarcacoes ao fundo, faixa ribeirinha intercalando area premium e arquibancada, e a reta correndo do Torii ate a Joca Brandao. Centro de eventos e CCP ficam fora da reta.">
+        <defs>
+          <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#0B5FFF" stop-opacity="0.34"/>
+            <stop offset="100%" stop-color="#0B5FFF" stop-opacity="0.10"/>
+          </linearGradient>
+        </defs>
+
+        <!-- ── RIO ── -->
+        <rect x="0" y="10" width="760" height="58" fill="url(#water)"/>
+        <text x="14" y="26" fill="#5B9BFF" font-family="IBM Plex Mono" font-size="8" letter-spacing="1.6">RIO ITAJAÍ-AÇU</text>
+        <!-- embarcacoes agrupadas sobre os setores premium -->
+        <g fill="#5B9BFF" opacity="0.85">
+          <rect x="86"  y="40" width="30" height="6" rx="3"/><rect x="122" y="40" width="30" height="6" rx="3"/>
+          <rect x="96"  y="52" width="30" height="6" rx="3"/><rect x="134" y="52" width="30" height="6" rx="3"/>
+          <rect x="300" y="40" width="30" height="6" rx="3"/><rect x="336" y="40" width="30" height="6" rx="3"/>
+          <rect x="310" y="52" width="30" height="6" rx="3"/><rect x="348" y="52" width="30" height="6" rx="3"/>
+          <rect x="470" y="40" width="30" height="6" rx="3"/><rect x="506" y="40" width="30" height="6" rx="3"/>
+          <rect x="480" y="52" width="30" height="6" rx="3"/><rect x="518" y="52" width="30" height="6" rx="3"/>
+        </g>
+
+        <!-- ── FAIXA RIBEIRINHA: premium e arquibancada alternando, de frente para a agua ── -->
+        <rect x="70"  y="76" width="110" height="26" rx="2" fill="#0B5FFF" opacity="0.62"/>
+        <rect x="184" y="76" width="102" height="26" rx="2" fill="#B7C6DA" opacity="0.32"/>
+        <rect x="290" y="76" width="96"  height="26" rx="2" fill="#0B5FFF" opacity="0.62"/>
+        <rect x="390" y="76" width="72"  height="26" rx="2" fill="#B7C6DA" opacity="0.32"/>
+        <rect x="466" y="76" width="94"  height="26" rx="2" fill="#0B5FFF" opacity="0.62"/>
+        <text x="125" y="93" fill="#FFFFFF" font-family="IBM Plex Mono" font-size="7" text-anchor="middle" font-weight="600">PREMIUM · BARCO</text>
+        <text x="235" y="93" fill="#0A1A2F" font-family="IBM Plex Mono" font-size="7" text-anchor="middle" font-weight="600">ARQUIBANCADA</text>
+        <text x="338" y="93" fill="#FFFFFF" font-family="IBM Plex Mono" font-size="7" text-anchor="middle" font-weight="600">PREMIUM · BARCO</text>
+        <text x="426" y="93" fill="#0A1A2F" font-family="IBM Plex Mono" font-size="7" text-anchor="middle" font-weight="600">ARQUIB.</text>
+        <text x="513" y="93" fill="#FFFFFF" font-family="IBM Plex Mono" font-size="7" text-anchor="middle" font-weight="600">PREMIUM · BARCO</text>
+        <text x="14" y="93" fill="#B7C6DA" font-family="IBM Plex Mono" font-size="7">FAIXA</text>
+        <text x="14" y="102" fill="#B7C6DA" font-family="IBM Plex Mono" font-size="7">RIBEIRINHA</text>
+
+        <!-- ── RETA ── -->
+        <line x1="70" y1="126" x2="560" y2="126" stroke="#0B5FFF" stroke-width="13" stroke-linecap="round"/>
+        <text x="315" y="130" fill="#FFFFFF" font-family="Barlow Condensed" font-size="11" font-weight="800" text-anchor="middle" letter-spacing="1.2">RETA BEIRA-RIO · ~950 m</text>
+
+        <!-- ── ZONA FORA DA RETA ── -->
+        <rect x="566" y="112" width="180" height="28" fill="#25405E" opacity="0.4" rx="2"/>
+        <text x="656" y="130" fill="#8FA3BC" font-family="IBM Plex Mono" font-size="7" text-anchor="middle">CENTRO DE EVENTOS → CCP</text>
+        <text x="656" y="152" fill="#6E86A3" font-family="IBM Plex Mono" font-size="6.5" text-anchor="middle">fora da reta</text>
+
+        <!-- ── RETORNO POR DENTRO ── -->
+        <path d="M560,126 Q582,126 582,152 L582,196 Q582,218 556,218 L74,218 Q48,218 48,192 L48,152 Q48,126 70,126"
+              stroke="#25405E" stroke-width="9" fill="none" stroke-dasharray="6 7" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="315" y="234" fill="#6E86A3" font-family="IBM Plex Mono" font-size="7.5" text-anchor="middle">RETORNO POR DENTRO · TRAÇADO A DEFINIR NA F2</text>
+
+        <!-- ── MARCADORES ── -->
+        <!-- Torii -->
+        <g>
+          <path d="M60,106 L80,106 M62,111 L78,111 M64,106 L64,120 M76,106 L76,120"
+                stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" fill="none"/>
+        </g>
+        <circle cx="70" cy="126" r="7" fill="#FFFFFF"/>
+        <text x="70" y="264" fill="#FFFFFF" font-family="Barlow Condensed" font-size="11" font-weight="700" text-anchor="middle">TORII</text>
+        <text x="70" y="276" fill="#6E86A3" font-family="IBM Plex Mono" font-size="6.5" text-anchor="middle">largada · 0 m</text>
+
+        <circle cx="182" cy="126" r="3.5" fill="#B7C6DA"/>
+        <text x="182" y="264" fill="#B7C6DA" font-family="IBM Plex Mono" font-size="7" text-anchor="middle">praça</text>
+        <text x="182" y="275" fill="#6E86A3" font-family="IBM Plex Mono" font-size="6.5" text-anchor="middle">217 m</text>
+
+        <circle cx="282" cy="126" r="3.5" fill="#B7C6DA"/>
+        <text x="282" y="264" fill="#B7C6DA" font-family="IBM Plex Mono" font-size="7" text-anchor="middle">parque linear</text>
+        <text x="282" y="275" fill="#6E86A3" font-family="IBM Plex Mono" font-size="6.5" text-anchor="middle">412 m</text>
+
+        <circle cx="560" cy="126" r="7" fill="#FFFFFF"/>
+        <text x="560" y="264" fill="#FFFFFF" font-family="Barlow Condensed" font-size="11" font-weight="700" text-anchor="middle">JOCA BRANDÃO</text>
+        <text x="560" y="276" fill="#6E86A3" font-family="IBM Plex Mono" font-size="6.5" text-anchor="middle">fim da reta · ~950 m</text>
+
+        <!-- escala -->
+        <line x1="70" y1="248" x2="560" y2="248" stroke="#5B7089" stroke-width="1"/>
+        <line x1="70" y1="244" x2="70" y2="252" stroke="#5B7089" stroke-width="1"/>
+        <line x1="560" y1="244" x2="560" y2="252" stroke="#5B7089" stroke-width="1"/>
+
+        <text x="746" y="290" fill="#6E86A3" font-family="IBM Plex Mono" font-size="6.5" text-anchor="end">esquema em perfil · sem orientação cardinal · fora de escala vertical</text>
+      </svg>
+
+      <div class="specs">
+        <div class="sp"><span>Reta Torii → Joca Brandão</span><span class="on">~950 m</span></div>
+        <div class="sp"><span>Faixa ribeirinha setorizável</span><span class="on">~950 m contínuos</span></div>
+        <div class="sp"><span>Torii → praça (Square Beira Rio)</span><span>~217 m</span></div>
+        <div class="sp"><span>Torii → parque linear (nº 1206)</span><span>~412 m</span></div>
+        <div class="sp"><span>Torii → centro de eventos</span><span>~1.070 m · fora da reta</span></div>
+        <div class="sp"><span>CCP</span><span class="tbd">depois do centro de eventos</span></div>
+        <div class="sp"><span>Extensão-alvo do circuito fechado</span><span>2,5 – 3,0 km</span></div>
+        <div class="sp"><span>Via de retorno</span><span class="tbd">por dentro · a definir · F2</span></div>
+        <div class="sp"><span>Localização do paddock</span><span class="tbd">a definir · F2</span></div>
+        <div class="sp"><span>Topografia</span><span>plana e contínua</span></div>
+        <div class="sp"><span>Grau de homologação alvo</span><span class="on">Grau 3 (CBA)</span></div>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="lbl">Âncoras verificáveis · abra e confira</span>
+      As distâncias são calculadas em linha reta sobre as coordenadas abaixo; a distância viária é ligeiramente maior. <b>A reta vai do Torii até a Joca Brandão, na chegada da Marina — não alcança o centro de eventos nem o CCP</b>, que ficam além. O retorno se dá por dentro, em via paralela a definir na F2.
+    </div>
+
+    <div class="tw" style="margin-top:16px;">
+      <table>
+        <thead><tr><th>Âncora</th><th>Distância do Torii</th><th>Papel</th><th>Coordenadas</th><th>Mapa</th></tr></thead>
+        <tbody>
+          <tr class="mark">
+            <td class="nm">Torii — Portal Japonês<small>Av. Min. Victor Konder — Fazenda</small></td>
+            <td class="d hi">0 m</td>
+            <td><b>Hipótese de largada e chegada.</b> Monumento da irmandade Itajaí–Sodegaura: marco visual pronto para o enquadramento de abertura da transmissão.</td>
+            <td class="d">-26,91874 / -48,65021</td>
+            <td><a href="https://www.google.com/maps/search/?api=1&query=-26.9187396,-48.6502143" target="_blank" rel="noopener">abrir</a></td>
+          </tr>
+          <tr>
+            <td class="nm">Praça / Square Beira Rio<small>Av. Beira Rio — Fazenda</small></td>
+            <td class="d">~217 m</td>
+            <td>Ponto intermediário dentro da reta. Área aberta com vista para o rio.</td>
+            <td class="d">-26,91713 / -48,65144</td>
+            <td><a href="https://www.google.com/maps/search/?api=1&query=-26.9171307,-48.6514420" target="_blank" rel="noopener">abrir</a></td>
+          </tr>
+          <tr>
+            <td class="nm">Parque linear Beira Rio<small>Av. Min. Victor Konder, 1206</small></td>
+            <td class="d">~412 m</td>
+            <td>Eixo da reta. Faixa ribeirinha aberta, com vista para o rio.</td>
+            <td class="d">-26,91601 / -48,65301</td>
+            <td><a href="https://www.google.com/maps/search/?api=1&query=-26.9160051,-48.6530112" target="_blank" rel="noopener">abrir</a></td>
+          </tr>
+          <tr class="mark">
+            <td class="nm">Marina Itajaí<small>Av. Carlos Ely Castro, 100 — Centro</small></td>
+            <td class="d hi">~950 m</td>
+            <td><b>Chegada da Marina — fim da reta.</b> Referência do ponto de retorno, na altura da Av. Joca Brandão. Área em valorização, com shopping previsto.</td>
+            <td class="d">-26,91042 / -48,65225</td>
+            <td><a href="https://www.google.com/maps/search/?api=1&query=-26.9104178,-48.6522460" target="_blank" rel="noopener">abrir</a></td>
+          </tr>
+          <tr>
+            <td class="nm">Av. Joca Brandão<small>centroide da via</small></td>
+            <td class="d">~1.060 m</td>
+            <td>Via de referência para o retorno. Ponto exato de intersecção com a Beira-Rio a levantar na F1.</td>
+            <td class="d">-26,91161 / -48,65727</td>
+            <td><a href="https://www.google.com/maps/search/?api=1&query=-26.9116084,-48.6572734" target="_blank" rel="noopener">abrir</a></td>
+          </tr>
+          <tr>
+            <td class="nm">Centreventos<small>Av. Min. Victor Konder, 303 — Centro</small></td>
+            <td class="d">~1.070 m</td>
+            <td><b>Fora da reta.</b> Fica além do fim da reta. Uso eventual como apoio operacional a definir.</td>
+            <td class="d">-26,90958 / -48,65347</td>
+            <td><a href="https://www.google.com/maps/search/?api=1&query=-26.9095824,-48.6534713" target="_blank" rel="noopener">abrir</a></td>
+          </tr>
+          <tr>
+            <td class="nm">CCP — Terminal de Cruzeiros<small>após o centro de eventos</small></td>
+            <td class="d">—</td>
+            <td><b>Fora da reta.</b> Situado depois do centro de eventos. Não integra o corredor apresentado.</td>
+            <td class="d">a confirmar</td>
+            <td>—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cards tri" style="margin-top:20px;">
+      <div class="card">
+        <div class="n">Diferencial 01</div>
+        <h3>A reta d'água</h3>
+        <p>Uma reta longa junto ao rio. Nenhum circuito de rua brasileiro teve isso: Salvador foi montado no Centro Administrativo da Bahia, Belo Horizonte contorna um estádio, o Anhembi gira em torno do sambódromo. <b>A imagem aérea de carros em alta velocidade com água ao lado é um ativo de mídia que não se replica.</b></p>
+      </div>
+      <div class="card">
+        <div class="n">Diferencial 02</div>
+        <h3>Uma faixa de ~950 m para vender</h3>
+        <p>Toda a extensão do Torii até a Joca Brandão é área aberta com vista para o rio — e é <b>setorizável de ponta a ponta, intercalando arquibancada e premium náutico</b>. A margem navegável abre uma receita que circuito nenhum no país tem: embarcações como camarote. É o que faz de Mônaco a imagem que é. Aqui não é decoração — é mix de receita e enquadramento de TV exclusivo. <b>Operação náutica a validar com a Autoridade Portuária.</b></p>
+      </div>
+      <div class="card">
+        <div class="n">Diferencial 03</div>
+        <h3>Cidade plana e equipada</h3>
+        <p>Topografia contínua favorece traçado rápido e montagem mais simples que circuitos com desnível. Centro de eventos, terminal, marina, rede hoteleira e histórico de operação de público estão a poucas centenas de metros do fim da reta — <b>fora do traçado, mas dentro da operação</b>. Capex de apoio que outras sedes constroem, aqui já está no chão.</p>
+      </div>
+    </div>
+
+    <div class="note warn">
+      <span class="lbl">Nota de método · Precisão do desenho</span>
+      O esquema acima é um <b>perfil ilustrativo — não é um traçado nem um mapa</b>: não tem orientação cardinal nem escala vertical. O trecho em azul é a reta confirmada por coordenadas; tudo em tracejado é hipótese não definida. Geometria, larguras, raios, áreas de escape e a viabilidade do circuito fechado dependem de levantamento planialtimétrico (F1) e projeto geométrico (F2). <b>Nenhum material derivado deste dossiê deve apresentar um traçado desenhado como se fosse definido</b> — isso cria falsa precisão e se desfaz na primeira pergunta técnica.
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 3.0 ═══ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="hd"><div class="no">3.0</div><h2>Benchmark — circuitos de rua no Brasil</h2></div>
+    <p class="lead">Universo completo dos circuitos de rua que receberam automobilismo de ponta no país. São quatro casos. Itajaí seria o quinto — e o primeiro de Santa Catarina.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Circuito</th><th>Extensão</th><th>Curvas</th><th>Período</th><th>Investimento público</th><th>Escopo declarado</th><th>Ref.</th></tr></thead>
+        <tbody>
+          <tr class="mark">
+            <td class="nm">Anhembi<small>São Paulo · SP · Fórmula E</small></td>
+            <td class="d">2.930 m</td><td class="d">11</td><td class="d">2023–</td>
+            <td class="d hi">R$ 38,0 mi</td>
+            <td>Adequações geométricas no viário e sistema de proteção com barreiras de concreto, grades e telas. Sem repasse de verba à categoria. Contrato de 5 anos.</td>
+            <td class="ref">[1][2]</td>
+          </tr>
+          <tr>
+            <td class="nm">Toninho da Matta<small>Belo Horizonte · MG · Stock Car</small></td>
+            <td class="d">3.095–3.113 m</td><td class="d">12–13</td><td class="d">2024</td>
+            <td class="d hi">R$ 20,3 mi</td>
+            <td>Obras de adequação. ~7 km de gradis e ~7 km de barreiras de concreto. Homologado pela CBA. Longas retas, chicanes e gancho de 180°.</td>
+            <td class="ref">[4][5][6][7]</td>
+          </tr>
+          <tr>
+            <td class="nm">Ayrton Senna<small>Salvador · BA · Stock Car</small></td>
+            <td class="d">2.724 m</td><td class="d">7</td><td class="d">2009–2014</td>
+            <td class="d">n/d</td>
+            <td>Montado no Centro Administrativo da Bahia. 7 provas realizadas. Fee da categoria rateado entre Estado e Município.</td>
+            <td class="ref">[8][10]</td>
+          </tr>
+          <tr>
+            <td class="nm">Ribeirão Preto<small>Ribeirão Preto · SP · Stock Car</small></td>
+            <td class="d">2.221–2.500 m</td><td class="d">9–15</td><td class="d">2010–2015</td>
+            <td class="d">n/d</td>
+            <td>Traçado alterado três vezes ao longo das edições. Encerrado em 2015.</td>
+            <td class="ref">[9]</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">
+      <span class="lbl">Nota técnica · Calibragem do alvo</span>
+      A faixa praticada é de <b>2,2 a 3,1 km</b> com <b>7 a 15 curvas</b>. O Anhembi é o espelho mais fiel: extensão quase idêntica ao alvo de Itajaí, traçado urbano plano e escopo explícito de geometria viária + sistema de proteção. Os R$ 20,3 mi de BH e os R$ 38,0 mi de SP delimitam a faixa realista de investimento total.
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 4.0 ═══ -->
+<section class="sec tone">
+  <div class="wrap">
+    <div class="hd"><div class="no">4.0</div><h2>Benchmark — referências de escala de obra</h2></div>
+    <p class="lead">Autódromos permanentes. Não são o modelo de Itajaí, mas ancoram o custo unitário de pavimento em padrão de competição.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Obra</th><th>Ano</th><th>Investimento</th><th>Escopo</th><th>Ref.</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="nm">Interlagos — recapeamento<small>4.309 m · padrão Grau 1</small></td>
+            <td class="d">2024</td><td class="d hi">R$ 37,0 mi</td>
+            <td>Recapeamento completo do asfalto do autódromo mais obras de infraestrutura. Primeira obra desse porte na pista em 10 anos.</td>
+            <td class="ref">[11][12]</td>
+          </tr>
+          <tr>
+            <td class="nm">Interlagos — modernização<small>pacote completo</small></td>
+            <td class="d">2024</td><td class="d">R$ 163,6 mi</td>
+            <td>Pista, hospitality center de 22 mil m², túnel de 360 m sob a reta oposta, acessos, drenagem e esgoto.</td>
+            <td class="ref">[11]</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">
+      <span class="lbl">Nota técnica · Custo unitário derivado</span>
+      Interlagos entrega <b>~R$ 8,6 mi/km</b> de recapeamento em padrão Grau 1 — o teto absoluto do mercado. Um circuito de rua Grau 3 opera abaixo disso. Para ~3 km em Itajaí, a linha de pavimento projeta <b>R$ 8–15 mi</b> em cenário cheio, e cai conforme o estado real do pavimento existente no momento da obra.
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 5.0 ═══ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="hd"><div class="no">5.0</div><h2>Desenvolvimento da pista — fases e cronograma</h2></div>
+    <p class="lead">Sequência da concepção à primeira largada, dimensionada para uma janela de 18 meses. As fases F1 a F4 são serviço técnico e somam menos de 15% do capex — mas destravam tudo o que vem depois. Prazos indicativos e parcialmente sobreponíveis.</p>
+    <div class="ph">
+      <div class="phhead"><span>Fase</span><span>Entregável</span><span>Custo est.</span><span>Janela</span></div>
+      <div class="phr">
+        <div class="tag">F0</div>
+        <div class="bd"><h3>Sondagem de mercado e estruturação</h3><p>Mapeamento de projetistas credenciados com pelo menos três cotações, hipóteses de traçado, constituição societária e alinhamento inicial com a organizadora. Trabalho interno dos sócios.</p></div>
+        <div class="cost">—</div><div class="dur">M0 – M2</div>
+      </div>
+      <div class="phr">
+        <div class="tag">F1</div>
+        <div class="bd"><h3>Levantamento planialtimétrico cadastral</h3><p>Topografia do corredor e entorno, cadastro de interferências (drenagem, redes, mobiliário). <strong>Primeiro cheque real e o mais barato do projeto</strong> — sem ele não há projeto geométrico nem orçamento de obra.</p></div>
+        <div class="cost">R$ 0,2–0,4 mi</div><div class="dur">M1 – M3</div>
+      </div>
+      <div class="phr">
+        <div class="tag">F2</div>
+        <div class="bd"><h3>Projeto geométrico e de segurança</h3><p>Curvas, raios, greide e largura de pista com simulação de desempenho. <strong>É aqui que o traçado fechado passa a existir</strong> — ponto de retorno, via de volta, posição do paddock e extensão real da reta. Posicionamento de barreiras, run-off e debris fence.</p></div>
+        <div class="cost">R$ 1,1–2,1 mi</div><div class="dur">M3 – M8</div>
+      </div>
+      <div class="phr">
+        <div class="tag">F3</div>
+        <div class="bd"><h3>Projeto de pavimentação e complementares</h3><p>Dosagem asfáltica de alta aderência com ensaios de agregado e ligante. Drenagem, elétrica, race control, sinalização e plano de mobilidade urbana.</p></div>
+        <div class="cost">R$ 0,5–1,3 mi</div><div class="dur">M6 – M9</div>
+      </div>
+      <div class="phr">
+        <div class="tag">F4</div>
+        <div class="bd"><h3>Homologação junto à CBA</h3><p>A CBA é a autoridade desportiva nacional e único interlocutor reconhecido pela FIA — o promotor não fala diretamente com a federação internacional. Inclui submissão digital, inspeções durante e após a obra, e correção das não conformidades apontadas.</p></div>
+        <div class="cost">R$ 0,2–0,5 mi</div><div class="dur">M8 – M16</div>
+      </div>
+      <div class="phr own">
+        <div class="tag">F5</div>
+        <div class="bd"><h3>Obra de pavimento e geometria viária</h3><p>Fresagem, recapeamento em asfalto de competição, correções de greide, drenagem e <strong>ancoragens permanentes embutidas no pavimento</strong> — o detalhe que barateia toda montagem futura. Incide sobre via pública: ativo municipal por natureza.</p></div>
+        <div class="cost">R$ 8–15 mi</div><div class="dur">M9 – M15</div>
+      </div>
+      <div class="phr own">
+        <div class="tag">F6</div>
+        <div class="bd"><h3>Aquisição do kit de segurança</h3><p>Compra do sistema de proteção completo. Bem móvel, reutilizável, patrimônio da operação privada. <strong>Atenção ao lead time de fabricação.</strong> Detalhamento na seção 6.0.</p></div>
+        <div class="cost">R$ 6–12 mi</div><div class="dur">M10 – M15</div>
+      </div>
+      <div class="phr own">
+        <div class="tag">F7</div>
+        <div class="bd"><h3>Infraestrutura de apoio</h3><p>Race control, energia dedicada e redundante, fibra e telemetria para transmissão, iluminação e adequação da área de paddock definida na F2.</p></div>
+        <div class="cost">R$ 1–3 mi</div><div class="dur">M14 – M17</div>
+      </div>
+      <div class="phr">
+        <div class="tag">F8</div>
+        <div class="bd"><h3>Montagem, shakedown e largada</h3><p>Montagem do circuito, inspeção final da CBA, track walk e shakedown. A licença de circuito só é emitida após a verificação de que o executado corresponde ao projeto aprovado.</p></div>
+        <div class="cost">ver §7.0</div><div class="dur">M17 – M18</div>
+      </div>
+    </div>
+    <div class="note warn">
+      <span class="lbl">Alerta · Prazo e escassez de projetistas</span>
+      O rito é longo. Na Fórmula E, o processo com a cidade-sede começa cerca de <b>18 meses antes</b> da corrida e o pedido formal de homologação vai à FIA <b>9 meses antes</b> do evento. Some-se a isso um mercado de projetistas minúsculo: quando o Circuito dos Cristais foi concebido, os idealizadores registraram que <b>não havia no país empresas especializadas nesse tipo de empreendimento e que contratar profissionais europeus inviabilizaria a execução</b> — precisaram desenvolver a metodologia internamente. Escritórios credenciados pela FIA existem e trazem chancela, mas a custo internacional. <b>F0 e F1 precisam começar antes de qualquer anúncio público.</b> [14][15][16]
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 6.0 ═══ -->
+<section class="sec dark">
+  <div class="wrap">
+    <div class="hd"><div class="no">6.0</div><h2>Kit de segurança — o ativo</h2></div>
+    <p class="lead">A decisão financeira mais relevante do projeto. Comprar o sistema de proteção em vez de alugá-lo é o que separa "sediar uma corrida" de "ser dono de um circuito". Dimensionamento espelhado em Belo Horizonte: ~7 km de gradis e ~7 km de barreiras de concreto para um traçado de 3,1 km.</p>
+    <div class="tw">
+      <table class="mny">
+        <thead><tr><th>Componente</th><th>Especificação</th><th>Quantidade</th><th>Custo estimado</th></tr></thead>
+        <tbody>
+          <tr><td class="nm">Barreiras de concreto</td><td>Perfil New Jersey, ancoragem em pavimento</td><td class="d">~7 km</td><td class="d hi">R$ 2,5–4,5 mi</td></tr>
+          <tr><td class="nm">Gradis / debris fence</td><td>Contenção de detritos e proteção de público</td><td class="d">~7 km</td><td class="d hi">R$ 2,0–4,0 mi</td></tr>
+          <tr><td class="nm">Guard rail</td><td>Trechos de alta energia de impacto</td><td class="d">~2–3 km</td><td class="d">R$ 0,6–1,5 mi</td></tr>
+          <tr><td class="nm">Barreiras de absorção</td><td>Pilhas de pneus, módulos tipo Tecpro, zonas de escape</td><td class="d">pontos críticos</td><td class="d">R$ 0,6–1,5 mi</td></tr>
+          <tr><td class="nm">Galpão e logística</td><td>Armazenagem, inventário, movimentação</td><td class="d">1 unidade</td><td class="d">R$ 0,3–0,5 mi</td></tr>
+        </tbody>
+        <tfoot><tr><td colspan="3">Total — aquisição do kit</td><td class="d">R$ 6,0–12,0 mi</td></tr></tfoot>
+      </table>
+    </div>
+    <div class="note">
+      <span class="lbl">Nota técnica · Vida útil comprovada</span>
+      O kit não é consumível. Para montar a Fórmula E, São Paulo <b>reutilizou guard rails e zebras que estavam guardados num galpão da SPTuris desde a criação do circuito da Indy</b>, no início da década anterior. Dez anos depois, o mesmo equipamento voltou à rua. É o dado que sustenta tratar esta linha como <b>ativo imobilizado, e não despesa de evento</b>. [3]
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 7.0 ═══ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="hd"><div class="no">7.0</div><h2>Custo recorrente por competição</h2></div>
+    <p class="lead">O que custa preparar cada corrida depois que a pista existe. Duas colunas: operando com kit próprio ou alugando tudo a cada edição. A diferença é a tese inteira do projeto.</p>
+    <div class="tw">
+      <table class="mny">
+        <thead><tr><th>Linha operacional</th><th>Com kit próprio</th><th>Alugando o kit</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="nm">Sistema de proteção<small>barreiras, gradis, guard rail</small></td>
+            <td class="d hi">R$ 1,0–2,5 mi<span class="sm">montagem e desmontagem</span></td>
+            <td class="d">R$ 3,5–7,0 mi<span class="sm">locação + montagem</span></td>
+          </tr>
+          <tr><td class="nm">Arquibancadas e hospitality</td><td class="d">R$ 2,5–4,0 mi</td><td class="d">R$ 2,5–4,0 mi</td></tr>
+          <tr><td class="nm">Energia, geradores, telemetria</td><td class="d">R$ 0,5–1,0 mi</td><td class="d">R$ 0,8–1,5 mi</td></tr>
+          <tr><td class="nm">Segurança, brigada, resgate médico</td><td class="d">R$ 0,5–1,0 mi</td><td class="d">R$ 0,5–1,0 mi</td></tr>
+          <tr><td class="nm">Sinalização, ativação, produção</td><td class="d">R$ 1,0–1,8 mi</td><td class="d">R$ 1,0–1,8 mi</td></tr>
+          <tr><td class="nm">Contingência</td><td class="d">R$ 0,5–0,7 mi</td><td class="d">R$ 0,7–1,2 mi</td></tr>
+        </tbody>
+        <tfoot><tr><td>Total por competição</td><td class="d">R$ 6,0–11,0 mi</td><td class="d mut">R$ 9,0–16,5 mi</td></tr></tfoot>
+      </table>
+    </div>
+    <div class="note">
+      <span class="lbl">Nota técnica · Fora deste escopo</span>
+      Esta tabela cobre a <b>preparação física da corrida</b>. Não inclui o fee da categoria — a taxa paga à organizadora pelo direito de sediar a etapa —, que é linha separada e aparece isolada na calculadora. Também não inclui cronometragem, race control técnico e direção de prova, que tendem a estar embutidos no escopo da organizadora. <b>Confirmar em reunião técnica para evitar dupla contagem.</b>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 8.0 — RECEITA ═══ -->
+<section class="sec tone">
+  <div class="wrap">
+    <div class="hd"><div class="no">8.0</div><h2>Modelo de receita</h2></div>
+    <p class="lead">Um dossiê que só apresenta custo responde metade da pergunta. Esta seção mapeia de onde vem o dinheiro — e, principalmente, qual receita é da operação local e qual pertence à categoria. <b>Essa divisão é contratual e é a incógnita nº 1 do projeto.</b></p>
+
+    <div class="blocks" style="grid-template-columns:1fr 1fr;">
+      <div class="blk p">
+        <div class="who">Coluna A</div>
+        <h3>Potencialmente captável pela operação</h3>
+        <div class="tot">a confirmar</div>
+        <ul>
+          <li><span>Bilheteria e setorização</span><span>ver tabela</span></li>
+          <li><span>Camarotes e hospitality</span><span>alta margem</span></li>
+          <li><span>Hospitality náutico (embarcações)</span><span>exclusivo</span></li>
+          <li><span>Naming rights da etapa</span><span>cota âncora</span></li>
+          <li><span>Cotas de patrocínio local</span><span>por segmento</span></li>
+          <li><span>A&amp;B, concessões e ativações</span><span>recorrente</span></li>
+        </ul>
+        <p class="fine">É esta coluna que sustenta a operação privada. Sua dimensão real depende inteiramente do contrato com a organizadora.</p>
+        <p class="fine"><b>Alavanca de mix:</b> a faixa ribeirinha de ~950 m da §2.0 é setorizável de ponta a ponta, intercalando arquibancada popular e premium com vista para o rio. Cada metro de margem vira decisão de precificação — não é capacidade fixa, é mix ajustável a cada edição.</p>
+      </div>
+      <div class="blk">
+        <div class="who">Coluna B</div>
+        <h3>Tipicamente da categoria</h3>
+        <div class="tot">não captável</div>
+        <ul>
+          <li><span>Direitos de transmissão</span><span>nacional</span></li>
+          <li><span>Patrocínio master e naming da categoria</span><span>nacional</span></li>
+          <li><span>Patrocínio de pilotos e equipes</span><span>das escuderias</span></li>
+          <li><span>Licenciamento e mídias próprias</span><span>da marca</span></li>
+        </ul>
+        <p class="fine">Receita nacional da propriedade esportiva. Não fica com a sede — mas é o que entrega a exposição que valoriza a Coluna A.</p>
+      </div>
+    </div>
+
+    <div class="tw" style="margin-top:20px;">
+      <table>
+        <thead><tr><th>Setor de ingresso</th><th>Faixa praticada</th><th>Observação</th><th>Ref.</th></tr></thead>
+        <tbody>
+          <tr><td class="nm">Arquibancada descoberta</td><td class="d">R$ 30 – 60</td><td>Entrada popular. Meia e inteira.</td><td class="ref">[19]</td></tr>
+          <tr><td class="nm">Combo família (4 ingressos)</td><td class="d">R$ 180 – 240</td><td>Estímulo a público familiar.</td><td class="ref">[19][20]</td></tr>
+          <tr><td class="nm">Arquibancada + visitação aos boxes</td><td class="d">R$ 100 – 200</td><td>Contato com pilotos e carros. Alto valor percebido.</td><td class="ref">[19]</td></tr>
+          <tr><td class="nm">Gramado / platô premium</td><td class="d">R$ 220</td><td>Com visitação aos boxes chega a R$ 660.</td><td class="ref">[20]</td></tr>
+          <tr class="mark"><td class="nm">Lounge / camarote</td><td class="d">R$ 670 – 700</td><td>Vista privilegiada e hospitality. Margem mais alta do mix.</td><td class="ref">[19]</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note warn">
+      <span class="lbl">Incógnita nº 1 · A divisão contratual de receita</span>
+      Em alguns modelos a organizadora retém parcela relevante da bilheteria e do naming da etapa; em outros, a promotora local fica com quase tudo e paga o fee em troca. <b>A diferença entre os dois cenários decide se este projeto é um negócio ou um custo.</b> É a primeira pergunta a fazer na reunião técnica — antes de traçado, antes de calendário, antes de valor de fee. Enquanto não houver resposta, qualquer projeção de receita neste dossiê é hipótese e deve ser tratada como tal.
+    </div>
+
+    <div class="note">
+      <span class="lbl">Nota técnica · O que vale mais aqui do que em outro lugar</span>
+      Singularidade não é vaidade de projeto — é precificação. Um traçado genérico compete por cota com qualquer outra etapa do calendário. Um traçado que só existe aqui sustenta <b>naming rights mais caro, camarote náutico e um pacote de mídia diferenciado</b>. É o que muda o teto da Coluna A e, por consequência, o retorno do investimento. Simule na §9.0.
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 9.0 — CALCULADORA ═══ -->
+<section class="sec dark">
+  <div class="wrap">
+    <div class="hd"><div class="no">9.0</div><h2>Calculadora de cenários</h2></div>
+    <p class="lead">Ferramenta de reunião. Troque qualquer premissa por número real conforme as cotações chegarem, e o modelo recalcula na hora: capex, custo e resultado por edição, payback do investimento e o ponto em que comprar o kit passa a compensar. Todos os valores em R$ milhões.</p>
+
+    <div class="calc">
+      <div class="inputs">
+        <div class="grp">
+          <h3>Capex — investimento inicial</h3>
+          <div class="irow"><label>Projeto e engenharia<small>F1–F4</small></label><input type="number" id="i_proj" value="3.0" step="0.1" min="0"></div>
+          <div class="irow"><label>Kit de segurança<small>F6 · compra</small></label><input type="number" id="i_kit" value="9.0" step="0.5" min="0"></div>
+          <div class="irow"><label>Infra de apoio<small>F7</small></label><input type="number" id="i_infra" value="2.0" step="0.5" min="0"></div>
+          <div class="irow"><label>Obra de pavimento<small>F5 · via pública</small></label><input type="number" id="i_obra" value="11.0" step="0.5" min="0"></div>
+          <div class="toggles"><label class="tg"><input type="checkbox" id="t_obra"> Obra entra no capex privado</label></div>
+        </div>
+        <div class="grp">
+          <h3>Por competição</h3>
+          <div class="irow"><label>Montagem do kit próprio<small>por edição</small></label><input type="number" id="i_mont" value="1.75" step="0.25" min="0"></div>
+          <div class="irow"><label>Locação do kit<small>cenário comparativo</small></label><input type="number" id="i_loc" value="5.25" step="0.25" min="0"></div>
+          <div class="irow"><label>Demais custos operacionais<small>arquibancada, energia, produção</small></label><input type="number" id="i_oper" value="6.0" step="0.5" min="0"></div>
+          <div class="irow"><label>Fee da categoria<small>por edição</small></label><input type="number" id="i_fee" value="7.0" step="0.5" min="0"></div>
+          <div class="toggles"><label class="tg"><input type="checkbox" id="t_fee"> Fee entra no custo da operação</label></div>
+        </div>
+        <div class="grp">
+          <h3>Receita e horizonte</h3>
+          <div class="irow"><label>Receita captável por edição<small>Coluna A · §8.0 · hipótese</small></label><input type="number" id="i_rec" value="12.0" step="0.5" min="0"></div>
+          <div class="irow"><label>Número de corridas<small>1 a 10</small></label><input type="number" id="i_n" value="5" step="1" min="1" max="10"></div>
+        </div>
+        <button class="resetbtn" id="reset">Restaurar premissas</button>
+      </div>
+
+      <div class="outputs">
+        <div class="ocards">
+          <div class="oc"><div class="k">Capex privado</div><div class="v" id="o_capex">—</div><div class="s" id="o_capex_s">—</div></div>
+          <div class="oc"><div class="k">Custo por corrida</div><div class="v" id="o_edic">—</div><div class="s" id="o_edic_s">—</div></div>
+          <div class="oc"><div class="k">Resultado por corrida</div><div class="v" id="o_res">—</div><div class="s" id="o_res_s">—</div></div>
+          <div class="oc"><div class="k">Payback do capex</div><div class="v" id="o_pay">—</div><div class="s" id="o_pay_s">—</div></div>
+        </div>
+
+        <div class="chartbox">
+          <div class="tabs" role="tablist">
+            <button id="tab_a" role="tab" aria-selected="true">Caixa acumulado</button>
+            <button id="tab_b" role="tab" aria-selected="false">Amortização do kit</button>
+          </div>
+          <svg id="chart" viewBox="0 0 760 340" role="img" aria-label="Gráfico dinâmico de cenário financeiro."></svg>
+          <div class="legend" id="legend"></div>
+        </div>
+
+        <div class="tw">
+          <table class="mny">
+            <thead><tr><th>Corrida</th><th>Custo</th><th>Receita</th><th>Resultado</th><th>Caixa acumulado</th></tr></thead>
+            <tbody id="tbody_sim"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="note warn">
+      <span class="lbl">Aviso · A receita é a premissa mais frágil</span>
+      O campo <b>"receita captável por edição"</b> vem com um valor ilustrativo. Ele só passa a significar alguma coisa depois de respondida a incógnita nº 1 da §8.0 — quanto da bilheteria, do naming e das cotas fica com a operação local. <b>Não leve este número a um investidor como projeção.</b> Leve como ferramenta: mostre o que precisa ser verdade para o projeto fechar.
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 10.0 ═══ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="hd"><div class="no">10.0</div><h2>Repartição do investimento</h2></div>
+    <p class="lead">Estrutura proposta. O critério não é político, é patrimonial: cada parte banca aquilo de que ficará dona.</p>
+    <div class="blocks">
+      <div class="blk p">
+        <div class="who">Bloco A · Operação privada</div>
+        <h3>Capex da SPE</h3>
+        <div class="tot">R$ 9–19 mi</div>
+        <ul>
+          <li><span>Projeto e engenharia (F1–F4)</span><span>R$ 2,0–4,3 mi</span></li>
+          <li><span>Kit de segurança (F6)</span><span>R$ 6,0–12,0 mi</span></li>
+          <li><span>Infra de apoio (F7)</span><span>R$ 1,0–3,0 mi</span></li>
+        </ul>
+        <p class="fine">Tudo aqui é bem móvel ou propriedade intelectual — permanece com a operação privada e viaja entre edições e categorias. É o que se leva se o projeto mudar de escala.</p>
+      </div>
+      <div class="blk m">
+        <div class="who">Bloco B · Município</div>
+        <h3>Contrapartida a construir</h3>
+        <div class="tot">obra + apoio</div>
+        <ul>
+          <li><span>Pavimento e geometria (F5)</span><span>R$ 8–15 mi</span></li>
+          <li><span>Autorização e mobilidade</span><span>institucional</span></li>
+          <li><span>Cota de patrocínio</span><span>a definir</span></li>
+        </ul>
+        <p class="fine">A obra recai sobre via pública — é ativo municipal por natureza e fica como legado urbano 365 dias por ano. Valores e instrumentos <b>a serem construídos em consulta</b>, sem qualquer compromisso prévio.</p>
+      </div>
+      <div class="blk e">
+        <div class="who">Bloco C · Estado</div>
+        <h3>Consulta a realizar</h3>
+        <div class="tot">fee da categoria</div>
+        <ul>
+          <li><span>Taxa de contrato · organizadora</span><span>a apurar</span></li>
+        </ul>
+        <p class="fine">Precedente: em Salvador o fee foi rateado entre Estado e Município, com a maior fatia no Estado. É a única despesa "pura" do arranjo. <b>Hipótese de trabalho a ser submetida — não há tratativa em curso.</b></p>
+      </div>
+    </div>
+    <div class="note warn">
+      <span class="lbl">Ponto aberto · Quem executa a obra em via pública</span>
+      A F5 incide sobre patrimônio público. Há dois caminhos: o Município executa e a obra entra no orçamento dele, ou a operação privada executa e transfere formalmente a benfeitoria. <b>São desenhos jurídicos distintos, com consequências tributárias e de controle diferentes.</b> Definir antes de qualquer compromisso público.
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 11.0 ═══ -->
+<section class="sec tone">
+  <div class="wrap">
+    <div class="hd"><div class="no">11.0</div><h2>Trabalho conjunto com o poder público</h2></div>
+    <p class="lead">Não existe, na história do automobilismo brasileiro, circuito de rua realizado sem participação do poder público. A pergunta nunca foi <em>se</em>, e sim <em>como</em>. Abaixo, como cada cidade estruturou — precedentes que orientam o desenho a ser proposto em Itajaí.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Cidade</th><th>Papel do privado</th><th>Papel do Município</th><th>Papel do Estado</th><th>Ref.</th></tr></thead>
+        <tbody>
+          <tr class="mark">
+            <td class="nm">Belo Horizonte<small>modelo mais próximo</small></td>
+            <td>Promotora privada (Speed Seven) em iniciativa conjunta com a organizadora: operação, captação e festival.</td>
+            <td>Obras de adequação do circuito — R$ 20,3 mi.</td>
+            <td>—</td>
+            <td class="ref">[4][5]</td>
+          </tr>
+          <tr>
+            <td class="nm">São Paulo<small>Fórmula E · Anhembi</small></td>
+            <td>Categoria internacional como contraparte contratual.</td>
+            <td>Preparação do circuito — R$ 38 mi. <b>Sem repasse de verba à categoria.</b> Contrato de 5 anos.</td>
+            <td>—</td>
+            <td class="ref">[1]</td>
+          </tr>
+          <tr>
+            <td class="nm">Salvador<small>Stock Car</small></td>
+            <td>Organizadora da categoria.</td>
+            <td>Parcela menor do fee.</td>
+            <td>Maior fatia do fee, via órgão de turismo do Estado.</td>
+            <td class="ref">[8][10]</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="cards" style="margin-top:20px;">
+      <div class="card">
+        <div class="n">Leitura estratégica</div>
+        <h3>O espelho é Belo Horizonte</h3>
+        <p>É o caso mais próximo do desenho de Itajaí: <b>uma promotora privada conduz o projeto e a operação; o Município entra com a obra de adequação da via</b>. Não houve aporte estadual. É o precedente a apresentar — não como pedido de dinheiro, mas como divisão natural de papéis: o privado faz o que é seu, o público cuida do que já é seu.</p>
+      </div>
+      <div class="card">
+        <div class="n">O que se pede — e o que não se pede</div>
+        <h3>Um pedido enxuto</h3>
+        <p><b>Pede-se:</b> autorização de uso do viário, plano conjunto de mobilidade, intenção formal de promover o circuito e a adequação do pavimento como obra pública. <b>Não se pede:</b> financiamento da operação, cobertura de risco comercial ou garantia de receita. <b>A operação privada assume o risco privado.</b></p>
+      </div>
+    </div>
+    <div class="note warn">
+      <span class="lbl">Nota de método · Estágio das tratativas</span>
+      Este dossiê registra <b>hipóteses de trabalho baseadas em precedentes públicos</b>. Não há, nesta data, tratativa, compromisso ou manifestação de Município, Governo do Estado, organizadora ou patrocinadores quanto a este projeto. Qualquer material derivado deste documento deve preservar essa distinção — <b>apresentar precedente de outras cidades não é o mesmo que anunciar adesão</b>, e confundir as duas coisas compromete a credibilidade do projeto na primeira pergunta difícil.
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 12.0 ═══ -->
+<section class="sec dark">
+  <div class="wrap">
+    <div class="hd"><div class="no">12.0</div><h2>Legado para Itajaí</h2></div>
+    <p class="lead">A tese a apresentar ao Município não é uma corrida. É um plano de médio e longo prazo em que a cidade ganha um equipamento, uma pauta recorrente no calendário nacional e uma vitrine — e o custo público se limita a uma obra que já é atribuição dele. Números da categoria e das cidades que já receberam.</p>
+    <div class="cards tri">
+      <div class="card">
+        <div class="n">Exposição</div><div class="metric">R$ 2,1 bi</div>
+        <h3>Retorno de mídia da categoria</h3>
+        <p>A Stock Car saiu de R$ 1 bilhão em 2024 para <b>R$ 2,1 bilhões em 2025</b> em retorno de mídia. Público feminino já em ~30% e crescimento consistente na faixa de 18 a 30 anos. Transmissão para mais de 150 países. Uma sede captura uma fração disso — e é essa fração que justifica promover o destino. [17]</p>
+      </div>
+      <div class="card">
+        <div class="n">Turismo</div><div class="metric">até R$ 30 mi</div>
+        <h3>Impacto econômico por etapa</h3>
+        <p>Estimativa do Centro de Inteligência da Economia da Secretaria de Turismo de São Paulo para o impacto de uma etapa da Stock Car na cidade que a recebe. A categoria reúne <b>cerca de 220 mil fãs por ano</b> presencialmente. [18]</p>
+      </div>
+      <div class="card">
+        <div class="n">Economia local</div><div class="metric">6 mil</div>
+        <h3>Postos de trabalho</h3>
+        <p>A primeira Fórmula E de São Paulo movimentou <b>R$ 300 milhões</b> na economia da cidade e gerou <b>6 mil postos de trabalho</b>, com público de 23 mil pessoas. Belo Horizonte projetou <b>R$ 200 milhões em cinco anos</b> e esperava 30 mil pessoas na primeira edição. [1][4]</p>
+      </div>
+    </div>
+    <div class="cards" style="margin-top:16px;">
+      <div class="card">
+        <div class="n">Legado 01</div>
+        <h3>O pavimento fica para o cidadão</h3>
+        <p>Em São Paulo, o pavimento de alta aderência executado para a Fórmula E ficou <b>como legado para o motorista comum</b> — a via serve à cidade 365 dias por ano. É o contra-argumento pronto à crítica de "gasto público com corrida": a obra não é da corrida, é da rua. A corrida só define o padrão de qualidade. [1]</p>
+      </div>
+      <div class="card">
+        <div class="n">Legado 02</div>
+        <h3>Um cartão de visita recorrente</h3>
+        <p>O valor não está na etapa isolada, está na <b>recorrência</b>. Uma cidade que "todo ano tem corrida" entra no mapa mental do país e no calendário do turismo. É o que sustenta o argumento de médio e longo prazo: o investimento inicial se dilui em cada temporada seguinte, e o equipamento passa a atrair categorias que hoje sequer consideram Santa Catarina.</p>
+      </div>
+      <div class="card">
+        <div class="n">Legado 03</div>
+        <h3>Uma pista que só existe aqui</h3>
+        <p>A reta d'água e o potencial de hospitality náutico dão à cidade <b>um enquadramento de TV que nenhuma outra sede brasileira consegue oferecer</b>. Não é a mesma corrida em outra cidade — é uma imagem que identifica Itajaí à primeira vista. Vitrine de destino, não só de esporte. §2.0</p>
+      </div>
+      <div class="card">
+        <div class="n">Legado 04</div>
+        <h3>Uma cidade que já sabe fazer</h3>
+        <p>Itajaí não parte do zero em grandes eventos: tem centro de eventos, terminal, cadeia hoteleira e histórico de operação de público. O circuito <b>não cria uma competência nova — capitaliza uma que já existe</b>, e a converte em pauta esportiva nacional recorrente.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 13.0 ═══ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="hd"><div class="no">13.0</div><h2>Homologação e expansão de calendário</h2></div>
+    <p class="lead">O grau da pista define quais categorias podem correr. A CBA é a autoridade desportiva nacional e único interlocutor reconhecido pela FIA. Os circuitos são enquadrados conforme a performance dos carros: quanto mais rápido o carro, maior a exigência da pista.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Grau</th><th>Habilita</th><th>Leitura para Itajaí</th></tr></thead>
+        <tbody>
+          <tr><td class="nm">Grau 1</td><td class="d">Fórmula 1</td><td>Fora de escala e de propósito. Interlagos custou R$ 37 mi só de recapeamento para manter este padrão.</td></tr>
+          <tr><td class="nm">Grau 2</td><td class="d">Fórmula 2</td><td>Custo desproporcional ao calendário realista da operação.</td></tr>
+          <tr class="mark"><td class="nm">Grau 3 — alvo</td><td class="d">Nível Fórmula 3</td><td><b>É o que basta e é onde mirar.</b> Habilita Stock Car — a porta de entrada — e depois Stock Series, Fórmula 4, Turismo Nacional, Porsche Cup e afins. Vila Real, circuito de rua consagrado em Portugal, opera em Grau 3.</td></tr>
+          <tr><td class="nm">Fórmula E</td><td class="d">Categorização própria</td><td>Horizonte de expansão. São Paulo mantém o E-Prix em circuito de rua de 2.930 m — precedente de que a geometria de Itajaí caberia no formato.</td></tr>
+          <tr><td class="nm">Duas rodas<small>CBM · fase posterior</small></td><td class="d">A avaliar</td><td>Motociclismo exige homologação separada, com requisitos próprios de escape. <b>Fora do escopo da primeira fase</b> — mas a decisão de deixar o traçado preparado ou não é tomada na F2, não depois.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">
+      <span class="lbl">Nota técnica · A sequência de categorias</span>
+      A Stock Car é a primeira oportunidade e define o padrão da pista. Com Grau 3 homologado, cada categoria adicional entra <b>praticamente só com o custo de operação</b> da seção 7.0 — não há novo capex de pista nem de kit. É esse custo marginal que transforma "uma etapa por ano" em "um calendário", e é o que a calculadora da §9.0 permite simular corrida a corrida.
+    </div>
+    <div class="note warn">
+      <span class="lbl">Ponto não óbvio · Motos não vêm de graça depois</span>
+      Automobilismo e motociclismo têm regulamentos distintos: <b>Interlagos recebe Fórmula 1 e WEC, mas não pode sediar MotoGP nem Superbike</b> — a pista é homologada para uma coisa, não para a outra. Se duas rodas entrar no plano em algum momento, <b>deixar o traçado compatível custa pouco na prancheta e muito depois da obra</b>. Decisão de projeto, não de calendário. [13]
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 14.0 — MATRIZ ═══ -->
+<section class="sec dark">
+  <div class="wrap">
+    <div class="hd"><div class="no">14.0</div><h2>Matriz de risco e oportunidade</h2></div>
+    <p class="lead">Mapa de calor probabilidade × impacto. <b style="color:var(--white)">Quadrados</b> são riscos, <b style="color:var(--signal-lt)">círculos</b> são oportunidades. Clique em qualquer marcador — ou em qualquer item da lista — para abrir a análise e a mitigação correspondente.</p>
+
+    <div class="rmx">
+      <div class="heat">
+        <svg id="heat" viewBox="0 0 460 420" role="img" aria-label="Matriz de risco: mapa de calor de probabilidade por impacto com riscos e oportunidades plotados."></svg>
+        <div class="hleg">
+          <div><i style="background:var(--h2)"></i> Baixo</div>
+          <div><i style="background:var(--h3)"></i> Moderado</div>
+          <div><i style="background:var(--h4)"></i> Alto</div>
+          <div><i style="background:var(--h5)"></i> Crítico</div>
+          <div><i class="op"></i> Oportunidade</div>
+        </div>
+        <div class="hint">Marcadores são clicáveis · navegação por teclado suportada</div>
+      </div>
+
+      <div class="rlist" id="rlist"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 15.0 ═══ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="hd"><div class="no">15.0</div><h2>Decisões a tomar</h2></div>
+    <p class="lead">O que precisa estar resolvido antes de qualquer compromisso público, assinatura ou anúncio.</p>
+    <div class="cards tri">
+      <div class="card"><div class="n">D-01</div><h3>Divisão de receita com a organizadora</h3><p>A incógnita nº 1. Quanto da bilheteria, naming e cotas fica com a operação local. Decide se o projeto é negócio ou custo. §8.0</p></div>
+      <div class="card"><div class="n">D-02</div><h3>Comprar ou alugar o kit</h3><p>Define se o projeto é um circuito ou uma corrida. Depende do número de provas por ano que a operação consegue contratar. Simular em §9.0.</p></div>
+      <div class="card"><div class="n">D-03</div><h3>Quem contrata o projetista</h3><p>A SPE ou a organizadora. Define a propriedade intelectual do traçado e se ele serve a várias categorias.</p></div>
+      <div class="card"><div class="n">D-04</div><h3>Grau-alvo e compatibilidade futura</h3><p>Grau 3 é a recomendação. Deixar ou não o traçado preparado para duas rodas é decisão de prancheta, na F2.</p></div>
+      <div class="card"><div class="n">D-05</div><h3>Instrumento com o Município</h3><p>Quem executa a obra em via pública e sob qual instrumento. Consequências tributárias e de controle distintas.</p></div>
+      <div class="card"><div class="n">D-06</div><h3>Estrutura societária e impedimentos</h3><p>Composição da SPE, quem representa perante o poder público, e o desenho formal de separação de papéis.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 16.0 ═══ -->
+<section class="sec tone">
+  <div class="wrap">
+    <div class="hd"><div class="no">16.0</div><h2>Referências</h2></div>
+    <p class="lead">Fontes primárias dos dados de benchmark. Todos os valores de outras cidades citados neste dossiê são rastreáveis abaixo.</p>
+    <div class="refs">
+      <div class="refr"><div class="i">[1]</div><div class="c"><span class="src">Prefeitura de São Paulo</span><span class="what">R$ 38 mi na preparação do circuito de rua do Anhembi; escopo de adequações geométricas e sistema de proteção; contrato de 5 anos com a Fórmula E; pavimento como legado; impacto de R$ 300 mi e 6 mil postos de trabalho.</span><a href="https://prefeitura.sp.gov.br/w/noticia/primeira-prova-de-formula-e-no-brasil-encerra-a-semana-da-mobilidade-da-prefeitura-de-sao-paulo-1" target="_blank" rel="noopener">prefeitura.sp.gov.br/w/noticia/primeira-prova-de-formula-e-no-brasil…</a></div></div>
+      <div class="refr"><div class="i">[2]</div><div class="c"><span class="src">Prefeitura de São Paulo</span><span class="what">Circuito do Anhembi: 2.930 m, 11 curvas; público de 25 mil pessoas.</span><a href="https://prefeitura.sp.gov.br/w/noticia/etapa-brasileira-da-formula-e-movimenta-r-74-milhoes-e-lota-as-arquibancadas-do-anhembi-1" target="_blank" rel="noopener">prefeitura.sp.gov.br/w/noticia/etapa-brasileira-da-formula-e-movimenta…</a></div></div>
+      <div class="refr"><div class="i">[3]</div><div class="c"><span class="src">Projeto Motor</span><span class="what">Reuso de guard rails e zebras guardados em galpão da SPTuris desde o circuito da Indy, na década anterior.</span><a href="https://projetomotor.com.br/formula-e-eprix-sao-paulo-anhembi-circuitos/" target="_blank" rel="noopener">projetomotor.com.br/formula-e-eprix-sao-paulo-anhembi-circuitos/</a></div></div>
+      <div class="refr"><div class="i">[4]</div><div class="c"><span class="src">O Tempo</span><span class="what">Circuito Toninho da Matta: 3.113 m, 12 curvas; expectativa de 30 mil pessoas e projeção de R$ 200 mi em cinco anos; única etapa de rua do calendário 2024.</span><a href="https://www.otempo.com.br/sports/especializados/2024/8/15/bh-entra-na-rota-dos-circuitos-de-rua-ao-receber-a-stock-car-pel" target="_blank" rel="noopener">otempo.com.br/sports/especializados/2024/8/15/bh-entra-na-rota…</a></div></div>
+      <div class="refr"><div class="i">[5]</div><div class="c"><span class="src">Autoracing</span><span class="what">~7 km de gradis e ~7 km de barreiras de concreto posicionados no circuito de BH; iniciativa conjunta Speed Seven + Vicar.</span><a href="https://www.autoracing.com.br/bh-stock-festival-batiza-o-circuito-com-o-nome-de-toninho-da-matta/" target="_blank" rel="noopener">autoracing.com.br/bh-stock-festival-batiza-o-circuito-com-o-nome…</a></div></div>
+      <div class="refr"><div class="i">[6]</div><div class="c"><span class="src">CBA — Confederação Brasileira de Automobilismo</span><span class="what">Traçado urbano de BH homologado pela CBA; descrição do percurso.</span><a href="https://www.cba.org.br/campeonato/noticiasinfo/212/2828/circuito-de-rua-de-bh-recebe-o-nome-de-toninho-da-matta" target="_blank" rel="noopener">cba.org.br/campeonato/noticiasinfo/212/2828/circuito-de-rua-de-bh…</a></div></div>
+      <div class="refr"><div class="i">[7]</div><div class="c"><span class="src">Wikipedia</span><span class="what">Circuito Toninho da Matta: 3.095 km, 13 curvas; recorde de volta 1:26.227 (Arthur Leist, 2024).</span><a href="https://en.wikipedia.org/wiki/Circuito_Toninho_da_Matta" target="_blank" rel="noopener">en.wikipedia.org/wiki/Circuito_Toninho_da_Matta</a></div></div>
+      <div class="refr"><div class="i">[8]</div><div class="c"><span class="src">Wikipedia</span><span class="what">Circuito Ayrton Senna (Salvador): 2.724 km; encerrado após 2014.</span><a href="https://en.wikipedia.org/wiki/Circuito_Ayrton_Senna" target="_blank" rel="noopener">en.wikipedia.org/wiki/Circuito_Ayrton_Senna</a></div></div>
+      <div class="refr"><div class="i">[9]</div><div class="c"><span class="src">Wikipedia</span><span class="what">Ribeirão Preto Street Circuit: três configurações entre 2.221 km e 2.500 km, 9 a 15 curvas; 2010–2015.</span><a href="https://en.wikipedia.org/wiki/Ribeir%C3%A3o_Preto_Street_Circuit" target="_blank" rel="noopener">en.wikipedia.org/wiki/Ribeirão_Preto_Street_Circuit</a></div></div>
+      <div class="refr"><div class="i">[10]</div><div class="c"><span class="src">Boletim do Paddock</span><span class="what">Salvador: 2.724 m e 7 curvas, montado no Centro Administrativo da Bahia; 13 corridas de rua na história da Stock Car.</span><a href="https://boletimdopaddock.com.br/stock-realiza-primeiro-evento-em-belo-horizonte/88012/" target="_blank" rel="noopener">boletimdopaddock.com.br/stock-realiza-primeiro-evento-em-belo-horizonte/</a></div></div>
+      <div class="refr"><div class="i">[11]</div><div class="c"><span class="src">Prefeitura de São Paulo</span><span class="what">Interlagos: R$ 163,6 mi em 2024; recapeamento completo da pista; hospitality center de 22 mil m²; túnel de 360 m.</span><a href="https://prefeitura.sp.gov.br/web/obras/w/com-investimento-de-r-163-6-milh%C3%B5es-e-pista-totalmente-recapeada-prefeitura-apresenta-aut%C3%B3dromo-mais-moderno" target="_blank" rel="noopener">prefeitura.sp.gov.br/web/obras/w/com-investimento-de-r-163-6-milhões…</a></div></div>
+      <div class="refr"><div class="i">[12]</div><div class="c"><span class="src">Prefeitura de São Paulo</span><span class="what">R$ 37 mi em reformas para a corrida de 2024, incluindo recapeamento completo do asfalto e obras de infraestrutura.</span><a href="https://prefeitura.sp.gov.br/web/obras/w/prefeitura-estima-que-f%C3%B3rmula-1-em-s%C3%A3o-paulo-tenha-impacto-de-r-2-bilh%C3%B5es-na-economia-da-cidade" target="_blank" rel="noopener">prefeitura.sp.gov.br/web/obras/w/prefeitura-estima-que-fórmula-1…</a></div></div>
+      <div class="refr"><div class="i">[13]</div><div class="c"><span class="src">Autosport (PT)</span><span class="what">Processo de homologação FIA; escala de graus; ASN como único interlocutor; Interlagos não homologado para MotoGP/Superbike; Vila Real em Grau 3.</span><a href="https://www.autosport.pt/formula1/f1/eduardo-freitas-explica-o-processo-de-homologacao-dos-circuitos/" target="_blank" rel="noopener">autosport.pt/formula1/f1/eduardo-freitas-explica-o-processo…</a></div></div>
+      <div class="refr"><div class="i">[14]</div><div class="c"><span class="src">FIA Formula E</span><span class="what">Rito de criação de circuito urbano: início ~18 meses antes; pedido formal de homologação à FIA 9 meses antes; montagem em duas semanas.</span><a href="https://www.fiaformulae.com/pt-br/news/17969" target="_blank" rel="noopener">fiaformulae.com/pt-br/news/17969</a></div></div>
+      <div class="refr"><div class="i">[15]</div><div class="c"><span class="src">TecPlaner — Circuito dos Cristais</span><span class="what">Ausência de empresas nacionais especializadas em projeto de circuito; custo proibitivo de profissionais europeus; homologação CBA e CBM.</span><a href="https://tecplaner.com.br/autodromos/autodromo-circuito-dos-cristais/" target="_blank" rel="noopener">tecplaner.com.br/autodromos/autodromo-circuito-dos-cristais/</a></div></div>
+      <div class="refr"><div class="i">[16]</div><div class="c"><span class="src">Dromo Circuit Design</span><span class="what">Projetista credenciado pela FIA; responsável pelo masterplan e traçado do novo circuito de F1 de Madri (5.474 m, 20 curvas).</span><a href="https://www.studiodromo.it/" target="_blank" rel="noopener">studiodromo.it</a></div></div>
+      <div class="refr"><div class="i">[17]</div><div class="c"><span class="src">MKT Esportivo</span><span class="what">Retorno de mídia da Stock Car: R$ 1 bi em 2024 e R$ 2,1 bi em 2025; público feminino ~30%; crescimento na faixa 18–30 anos.</span><a href="https://www.mktesportivo.com/2026/04/stock-car-amplia-base-de-patrocinadores-cresce-entre-jovens-e-mulheres-e-se-consolida-como-plataforma-de-negocios/" target="_blank" rel="noopener">mktesportivo.com/2026/04/stock-car-amplia-base-de-patrocinadores…</a></div></div>
+      <div class="refr"><div class="i">[18]</div><div class="c"><span class="src">Máquina do Esporte</span><span class="what">Impacto econômico de até R$ 30 mi por etapa (Centro de Inteligência da Economia / Sec. Turismo SP); média de 220 mil fãs por ano in loco.</span><a href="https://maquinadoesporte.com.br/stock-car/stock-car-inicia-temporada-2023-com-naming-rights-do-brb-e-mais-de-200-marcas-envolvidas/" target="_blank" rel="noopener">maquinadoesporte.com.br/stock-car/stock-car-inicia-temporada-2023…</a></div></div>
+      <div class="refr"><div class="i">[19]</div><div class="c"><span class="src">F1Mania</span><span class="what">Tabela de ingressos da Stock Car (Cascavel): arquibancada R$ 30/60; combo família R$ 180; arquibancada com visitação aos boxes R$ 100/200; lounge R$ 670/700.</span><a href="https://www.f1mania.net/stock-car/a-partir-de-r-30-stock-car-ja-vende-ingressos-para-cascavel/" target="_blank" rel="noopener">f1mania.net/stock-car/a-partir-de-r-30-stock-car-ja-vende-ingressos…</a></div></div>
+      <div class="refr"><div class="i">[20]</div><div class="c"><span class="src">O Popular</span><span class="what">Ingressos da Stock Car em Goiânia: gramado/platô R$ 220; com visitação aos boxes R$ 660; combo de quatro bilhetes R$ 240; setores de arquibancada esgotados.</span><a href="https://opopular.com.br/esporte/stock-car-em-goiania-restam-apenas-tres-categorias-de-ingressos-a-venda-1.3407833" target="_blank" rel="noopener">opopular.com.br/esporte/stock-car-em-goiania-restam-apenas-tres…</a></div></div>
+      <div class="refr"><div class="i">[21]</div><div class="c"><span class="src">Google Maps / Places</span><span class="what">Coordenadas das âncoras do corredor da Beira-Rio (§2.0). Distâncias calculadas em linha reta sobre essas coordenadas.</span><a href="https://www.google.com/maps/search/?api=1&query=-26.9171307,-48.6514420" target="_blank" rel="noopener">google.com/maps · Praça / Square Beira Rio</a></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <b>Circuito de Rua de Itajaí</b><br>
+      Dossiê técnico de viabilidade · CIR-ITJ-001 · R2<br>
+      Documento de trabalho — iniciativa privada<br>
+      Distribuição restrita aos sócios e parceiros
+      <div class="sig">
+        <div class="role">Desenvolvido por</div>
+        <div class="who">Diego Oliveira</div>
+        <div class="what">Estrategista de marketing e negócios</div>
+        <div class="contact">
+          <a href="mailto:cadeodiego@gmail.com">cadeodiego@gmail.com</a>
+          <a href="tel:+5547996621298">+55 47 99662-1298</a>
+        </div>
+      </div>
+    </div>
+    <div class="dis">
+      <b>Aviso</b><br>
+      Os valores de São Paulo, Belo Horizonte, Salvador, Ribeirão Preto e Interlagos são dados públicos, referenciados individualmente na seção 16.0. Todos os números atribuídos a Itajaí são estimativas de planejamento derivadas desse benchmark e não substituem sondagem de mercado, orçamento de fornecedor, projeto executivo ou parecer jurídico. O corredor da §2.0 não é um traçado: geometria, extensão real da reta, ponto de retorno e dimensionamento do kit dependem de levantamento planialtimétrico e homologação. As projeções de receita são hipóteses e dependem da divisão contratual com a organizadora. Não há, nesta data, tratativa ou compromisso firmado com Município, Governo do Estado, organizadora ou patrocinadores.
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ═══════ CALCULADORA ═══════ */
+  var DEF={proj:3.0,kit:9.0,infra:2.0,obra:11.0,mont:1.75,loc:5.25,oper:6.0,fee:7.0,rec:12.0,n:5};
+  var IDS=["proj","kit","infra","obra","mont","loc","oper","fee","rec","n"];
+  var view="a";
+
+  function g(id){var v=parseFloat(document.getElementById("i_"+id).value);return isNaN(v)?0:v;}
+  function money(v){var s=Math.abs(v).toLocaleString("pt-BR",{minimumFractionDigits:1,maximumFractionDigits:1});return (v<0?"−R$ ":"R$ ")+s+" mi";}
+  function ord(i){return i+"ª";}
+
+  function compute(){
+    var proj=g("proj"),kit=g("kit"),infra=g("infra"),obra=g("obra");
+    var mont=g("mont"),loc=g("loc"),oper=g("oper"),fee=g("fee"),rec=g("rec");
+    var n=Math.max(1,Math.min(10,Math.round(g("n"))));
+    var obraPriv=document.getElementById("t_obra").checked;
+    var feeOp=document.getElementById("t_fee").checked;
+
+    var capex=proj+kit+infra+(obraPriv?obra:0);
+    var perOwn=mont+oper+(feeOp?fee:0);
+    var res=rec-perOwn;
+
+    var kitOwn=[],kitLoc=[],cash=[],rows=[],bep=null,pay=null;
+    var a=kit,b=0,c=-capex;
+    for(var i=1;i<=n;i++){
+      a+=mont;b+=loc;c+=res;
+      kitOwn.push(a);kitLoc.push(b);cash.push(c);
+      if(bep===null&&a<b)bep=i;
+      if(pay===null&&c>=0)pay=i;
+      rows.push({i:i,cost:perOwn,rec:rec,res:res,cum:c});
+    }
+    return {capex:capex,perOwn:perOwn,rec:rec,res:res,kitOwn:kitOwn,kitLoc:kitLoc,cash:cash,rows:rows,bep:bep,pay:pay,n:n,obraPriv:obraPriv,feeOp:feeOp};
+  }
+
+  function axis(s,x0,x1,yb,yt,min,max,n,px){
+    for(var k=0;k<=4;k++){
+      var val=min+(max-min)*k/4;
+      var y=yb-((val-min)/(max-min))*(yb-yt);
+      s+='<line x1="'+x0+'" y1="'+y.toFixed(1)+'" x2="'+x1+'" y2="'+y.toFixed(1)+'" stroke="#25405E" stroke-width="1"/>';
+      s+='<text x="'+(x0-10)+'" y="'+(y+3.5).toFixed(1)+'" text-anchor="end" fill="#6E86A3" font-family="IBM Plex Mono" font-size="10">'+val.toFixed(0)+'</text>';
+    }
+    for(var i=0;i<n;i++){
+      s+='<text x="'+px(i).toFixed(1)+'" y="312" text-anchor="middle" fill="#6E86A3" font-family="IBM Plex Mono" font-size="9">'+(i+1)+'ª</text>';
+    }
+    s+='<text x="16" y="155" transform="rotate(-90 16 155)" text-anchor="middle" fill="#B7C6DA" font-family="IBM Plex Mono" font-size="9" letter-spacing="1">R$ MI</text>';
+    return s;
+  }
+
+  function series(arr,color,px,py){
+    var p='';
+    for(var i=0;i<arr.length;i++){p+=px(i).toFixed(1)+','+py(arr[i]).toFixed(1)+' ';}
+    var out='<polyline points="'+p.trim()+'" fill="none" stroke="'+color+'" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>';
+    for(var j=0;j<arr.length;j++){out+='<circle cx="'+px(j).toFixed(1)+'" cy="'+py(arr[j]).toFixed(1)+'" r="4" fill="'+color+'"/>';}
+    return out;
+  }
+
+  function chart(m){
+    var x0=64,x1=736,yb=286,yt=24,n=m.n;
+    var px=function(i){return n===1?(x0+x1)/2:x0+(x1-x0)*(i/(n-1));};
+    var s='',leg='';
+
+    if(view==="a"){
+      var vals=m.cash.concat([0,-m.capex]);
+      var mx=Math.max.apply(null,vals),mn=Math.min.apply(null,vals);
+      var pad=(mx-mn)*0.12||1; mx+=pad; mn-=pad;
+      var py=function(v){return yb-((v-mn)/(mx-mn))*(yb-yt);};
+      s=axis(s,x0,x1,yb,yt,mn,mx,n,px);
+      var zy=py(0);
+      s+='<line x1="'+x0+'" y1="'+zy.toFixed(1)+'" x2="'+x1+'" y2="'+zy.toFixed(1)+'" stroke="#FFFFFF" stroke-width="1.5" opacity="0.55"/>';
+      s+='<text x="'+(x1)+'" y="'+(zy-7).toFixed(1)+'" text-anchor="end" fill="#FFFFFF" font-family="IBM Plex Mono" font-size="9" opacity="0.7">EQUILÍBRIO</text>';
+      s+=series(m.cash,"#0B5FFF",px,py);
+      if(m.pay!==null&&n>1){
+        var bx=px(m.pay-1);
+        s+='<line x1="'+bx.toFixed(1)+'" y1="'+yt+'" x2="'+bx.toFixed(1)+'" y2="'+yb+'" stroke="#1E8A5F" stroke-width="1.5" stroke-dasharray="3 4"/>';
+        var tx=bx>(x1-120)?bx-8:bx+8, an=bx>(x1-120)?'end':'start';
+        s+='<text x="'+tx.toFixed(1)+'" y="'+(yt+14)+'" text-anchor="'+an+'" fill="#3FBF8F" font-family="IBM Plex Mono" font-size="10" font-weight="600">PAYBACK</text>';
+      }
+      leg='<div><i style="background:#0B5FFF"></i> Caixa acumulado da operação</div><div><i style="background:#FFFFFF;opacity:.6"></i> Linha de equilíbrio</div>';
+    } else {
+      var all=m.kitOwn.concat(m.kitLoc);
+      var mx2=Math.max.apply(null,all)*1.12||1;
+      var py2=function(v){return yb-(v/mx2)*(yb-yt);};
+      s=axis(s,x0,x1,yb,yt,0,mx2,n,px);
+      s+=series(m.kitLoc,"#C0392B",px,py2);
+      s+=series(m.kitOwn,"#0B5FFF",px,py2);
+      if(m.bep!==null&&n>1){
+        var bx2=px(m.bep-1);
+        s+='<line x1="'+bx2.toFixed(1)+'" y1="'+yt+'" x2="'+bx2.toFixed(1)+'" y2="'+yb+'" stroke="#FFFFFF" stroke-width="1" stroke-dasharray="3 4" opacity="0.5"/>';
+        var tx2=bx2>(x1-160)?bx2-8:bx2+8, an2=bx2>(x1-160)?'end':'start';
+        s+='<text x="'+tx2.toFixed(1)+'" y="'+(yt+14)+'" text-anchor="'+an2+'" fill="#FFFFFF" font-family="IBM Plex Mono" font-size="10" font-weight="600">PONTO DE VIRADA</text>';
+      }
+      leg='<div><i style="background:#C0392B"></i> Alugando o kit a cada corrida</div><div><i style="background:#0B5FFF"></i> Kit próprio — capex + montagem</div>';
+    }
+    s+='<line x1="'+x0+'" y1="'+yb+'" x2="'+x1+'" y2="'+yb+'" stroke="#5B7089" stroke-width="1.5"/>';
+    document.getElementById("chart").innerHTML=s;
+    document.getElementById("legend").innerHTML=leg;
+  }
+
+  function render(){
+    var m=compute();
+    document.getElementById("o_capex").textContent=money(m.capex);
+    document.getElementById("o_capex_s").textContent=m.obraPriv?"Projeto + kit + infra + obra":"Projeto + kit + infra";
+    document.getElementById("o_edic").textContent=money(m.perOwn);
+    document.getElementById("o_edic_s").textContent=m.feeOp?"Kit próprio, fee incluído":"Kit próprio, sem fee";
+    var er=document.getElementById("o_res");
+    er.textContent=money(m.res);
+    er.className="v"+(m.res<0?" warnv":"");
+    document.getElementById("o_res_s").textContent=m.res<0?"Operação deficitária por edição":"Receita menos custo da edição";
+    var ep=document.getElementById("o_pay");
+    ep.textContent=m.pay===null?"não atingido":ord(m.pay)+" corrida";
+    ep.className="v"+(m.pay===null?" warnv":"");
+    document.getElementById("o_pay_s").textContent=m.pay===null?"Capex não retorna no horizonte simulado":"Caixa acumulado cruza o equilíbrio";
+
+    var h='';
+    for(var i=0;i<m.rows.length;i++){
+      var r=m.rows[i];
+      var mk=(m.pay!==null&&r.i===m.pay)?' class="mark"':'';
+      h+='<tr'+mk+'><td class="nm">'+ord(r.i)+' corrida</td>'
+       +'<td class="d">'+money(r.cost)+'</td>'
+       +'<td class="d">'+money(r.rec)+'</td>'
+       +'<td class="d '+(r.res>=0?'pos':'neg')+'">'+money(r.res)+'</td>'
+       +'<td class="d '+(r.cum>=0?'pos':'neg')+'">'+money(r.cum)+'</td></tr>';
+    }
+    document.getElementById("tbody_sim").innerHTML=h;
+    chart(m);
+  }
+
+  for(var i=0;i<IDS.length;i++){document.getElementById("i_"+IDS[i]).addEventListener("input",render);}
+  document.getElementById("t_obra").addEventListener("change",render);
+  document.getElementById("t_fee").addEventListener("change",render);
+  document.getElementById("reset").addEventListener("click",function(){
+    for(var k=0;k<IDS.length;k++){document.getElementById("i_"+IDS[k]).value=DEF[IDS[k]];}
+    document.getElementById("t_obra").checked=false;
+    document.getElementById("t_fee").checked=false;
+    render();
+  });
+  function setView(v){
+    view=v;
+    document.getElementById("tab_a").setAttribute("aria-selected",v==="a"?"true":"false");
+    document.getElementById("tab_b").setAttribute("aria-selected",v==="b"?"true":"false");
+    render();
+  }
+  document.getElementById("tab_a").addEventListener("click",function(){setView("a");});
+  document.getElementById("tab_b").addEventListener("click",function(){setView("b");});
+  render();
+
+  /* ═══════ MATRIZ DE RISCO ═══════ */
+  var ITEMS=[
+    {c:"R1",t:"Conflito de interesse na interface pública",p:4,im:5,k:"r",
+     b:"<p><b>O quê:</b> a operação é privada e pleiteará autorização, apoio de mobilidade e eventual patrocínio junto ao Município, no qual um dos proponentes exerce função pública na área correlata. É a configuração que o controle externo e o Ministério Público examinam primeiro.</p><p><b>Mitigação:</b> declaração formal de impedimento, separação documental de papéis desde a origem, definição de quem representa a SPE perante o poder público e parecer prévio antes de qualquer pleito. Resolvido na largada custa barato; resolvido depois custa o projeto.</p>"},
+    {c:"R2",t:"Divisão de receita com a organizadora",p:4,im:5,k:"r",
+     b:"<p><b>O quê:</b> se a organizadora retiver a maior parte da bilheteria, do naming da etapa e das cotas, a Coluna A da §8.0 encolhe e a operação privada perde a base econômica — mesmo com o circuito construído.</p><p><b>Mitigação:</b> é a primeira pergunta da reunião técnica, antes de traçado e de fee. Nenhum capex deve ser comprometido antes da resposta.</p>"},
+    {c:"R3",t:"Quem contrata o projetista define de quem é o circuito",p:4,im:4,k:"r",
+     b:"<p><b>O quê:</b> em Belo Horizonte, o circuito nasceu de iniciativa conjunta da promotora com a organizadora. Se a organizadora traz o projetista, o traçado atende à categoria dela. Se a SPE contrata, o circuito é multi-categoria e o ativo é seu.</p><p><b>Mitigação:</b> travar antes do NDA. É a diferença entre uma pista da Stock Car e um circuito de Itajaí — e, portanto, entre um evento e um negócio.</p>"},
+    {c:"R4",t:"Porto ativo e escape no rio",p:3,im:5,k:"r",
+     b:"<p><b>O quê:</b> Itajaí é porto de carga em operação. O traçado precisa ficar na faixa urbana e turística, sem tocar a área operacional. E o fim da reta beira-rio deságua na margem — a zona de frenagem exige proteção dimensionada para impedir que um carro alcance a água.</p><p><b>Mitigação:</b> alinhamento com a Autoridade Portuária antes da F1; dimensionamento reforçado de escape e frenagem na F2. O mesmo alinhamento destrava o hospitality náutico da §2.0.</p>"},
+    {c:"R5",t:"Escassez de projetistas qualificados",p:4,im:3,k:"r",
+     b:"<p><b>O quê:</b> mercado nacional restrito e escritórios internacionais caros. Risco de proposta única e de precificação sem referência de mercado.</p><p><b>Mitigação:</b> sondagem na F0 com no mínimo três cotações e comparação explícita entre cenário nacional e internacional.</p>"},
+    {c:"R6",t:"Volatilidade do calendário",p:3,im:4,k:"r",
+     b:"<p><b>O quê:</b> contratos plurianuais furam. Belo Horizonte teve a etapa de 2025 cancelada apesar de contrato de cinco anos, e o circuito não constou do calendário 2026.</p><p><b>Mitigação:</b> o kit próprio é justamente o hedge — se uma categoria sai, o ativo serve à seguinte. Não amarrar a tese a um único parceiro nem a um único contrato.</p>"},
+    {c:"R7",t:"Aceitação urbana",p:3,im:3,k:"r",
+     b:"<p><b>O quê:</b> fechar o eixo central por vários dias impacta moradores e comércio. Em Belo Horizonte, a obra gerou reação por supressão de árvores e por comparações entre gasto com corrida e outras prioridades.</p><p><b>Mitigação:</b> traçado de mínima intervenção, plano de mobilidade construído com a cidade e comunicação antecipada do legado do pavimento — não do evento.</p>"},
+    {c:"O1",t:"Geografia irreplicável",p:4,im:5,k:"o",
+     b:"<p><b>O quê:</b> a reta d'água, a topografia plana e o potencial de hospitality náutico são condições que nenhuma outra sede brasileira reúne. Eleva o teto de receita de mídia, naming e camarote.</p><p><b>Como capturar:</b> validar a operação náutica com a Autoridade Portuária cedo e transformar o enquadramento exclusivo em argumento comercial de cota, não em detalhe de projeto.</p>"},
+    {c:"O2",t:"Custo marginal por categoria adicional",p:4,im:4,k:"o",
+     b:"<p><b>O quê:</b> com Grau 3 homologado e kit próprio, cada nova categoria entra praticamente só com o custo de operação da §7.0 — sem novo capex de pista nem de proteção.</p><p><b>Como capturar:</b> desenhar o traçado na F2 já pensando em multi-categoria, e prospectar a segunda prova antes da primeira acontecer.</p>"},
+    {c:"O3",t:"Legado do pavimento como argumento público",p:5,im:3,k:"o",
+     b:"<p><b>O quê:</b> o pavimento executado fica para o cidadão comum, como ocorreu em São Paulo. Neutraliza a crítica de gasto público com corrida e sustenta a conversa de médio e longo prazo com o Município.</p><p><b>Como capturar:</b> comunicar a obra como obra da rua, não da corrida — com o padrão de qualidade como consequência, não como motivo.</p>"}
+  ];
+
+  function lvl(p,im){var s=p*im; if(s>=16)return 5; if(s>=10)return 4; if(s>=5)return 3; return 2;}
+  function lvlName(l){return l===5?"Crítico":l===4?"Alto":l===3?"Moderado":"Baixo";}
+
+  function drawHeat(){
+    var x0=62,y0=340,cw=68,ch=62,s='';
+    var HC=["#1E8A5F","#7FB03A","#E8B303","#E07B23","#C0392B"];
+    for(var r=0;r<5;r++){        // impacto 5..1 top->bottom
+      for(var c=0;c<5;c++){      // probabilidade 1..5
+        var imp=5-r, prob=c+1;
+        var l=lvl(prob,imp);
+        var col=HC[l-1];
+        s+='<rect x="'+(x0+c*cw)+'" y="'+(y0-(5-r)*ch)+'" width="'+(cw-2)+'" height="'+(ch-2)+'" fill="'+col+'" opacity="0.30" stroke="#25405E" stroke-width="1"/>';
+      }
+    }
+    // eixos
+    var pl=["M. baixa","Baixa","Média","Alta","M. alta"];
+    var il=["M. baixo","Baixo","Médio","Alto","M. alto"];
+    for(var c2=0;c2<5;c2++){
+      s+='<text x="'+(x0+c2*cw+(cw-2)/2)+'" y="'+(y0+16)+'" text-anchor="middle" fill="#6E86A3" font-family="IBM Plex Mono" font-size="7.5">'+pl[c2]+'</text>';
+    }
+    for(var r2=0;r2<5;r2++){
+      var imp2=5-r2;
+      s+='<text x="'+(x0-8)+'" y="'+(y0-(5-r2)*ch+(ch-2)/2+3)+'" text-anchor="end" fill="#6E86A3" font-family="IBM Plex Mono" font-size="7.5">'+il[imp2-1]+'</text>';
+    }
+    s+='<text x="'+(x0+2.5*cw)+'" y="'+(y0+36)+'" text-anchor="middle" fill="#B7C6DA" font-family="IBM Plex Mono" font-size="8.5" letter-spacing="1.4">PROBABILIDADE</text>';
+    s+='<text x="14" y="'+(y0-2.5*ch)+'" transform="rotate(-90 14 '+(y0-2.5*ch)+')" text-anchor="middle" fill="#B7C6DA" font-family="IBM Plex Mono" font-size="8.5" letter-spacing="1.4">IMPACTO</text>';
+
+    // marcadores — offset para não sobrepor
+    var used={};
+    for(var i=0;i<ITEMS.length;i++){
+      var it=ITEMS[i];
+      var key=it.p+"-"+it.im;
+      var off=used[key]||0; used[key]=off+1;
+      var cx=x0+(it.p-1)*cw+(cw-2)/2 + (off?off*17-8:0);
+      var cy=y0-it.im*ch+(ch-2)/2;
+      var fill=it.k==="o"?"#0B5FFF":"#0A1A2F";
+      var stroke=it.k==="o"?"#5B9BFF":"#B7C6DA";
+      s+='<g class="rdot" data-code="'+it.c+'" tabindex="0" role="button" aria-label="'+it.c+' — '+it.t+'">';
+      if(it.k==="o"){
+        s+='<circle cx="'+cx+'" cy="'+cy+'" r="14" fill="'+fill+'" stroke="'+stroke+'" stroke-width="1.5"/>';
+      } else {
+        s+='<rect x="'+(cx-13)+'" y="'+(cy-13)+'" width="26" height="26" rx="3" fill="'+fill+'" stroke="'+stroke+'" stroke-width="1.5"/>';
+      }
+      s+='<text x="'+cx+'" y="'+(cy+3.5)+'" text-anchor="middle" fill="#FFFFFF" font-family="IBM Plex Mono" font-size="9" font-weight="600" pointer-events="none">'+it.c+'</text>';
+      s+='</g>';
+    }
+    document.getElementById("heat").innerHTML=s;
+  }
+
+  function drawList(){
+    var h='';
+    for(var i=0;i<ITEMS.length;i++){
+      var it=ITEMS[i];
+      var l=lvl(it.p,it.im);
+      var cls=it.k==="o"?"op":"lv"+l;
+      var sev=it.k==="o"?'<span class="sev sop">Oportunidade</span>':'<span class="sev s'+l+'">'+lvlName(l)+'</span>';
+      h+='<article class="ritem '+cls+'" data-code="'+it.c+'" tabindex="0">'
+        +'<div class="rh"><span class="code">'+it.c+'</span><h3>'+it.t+'</h3>'+sev+'</div>'
+        +'<div class="body">'+it.b+'<p class="meta">Probabilidade '+it.p+'/5 · Impacto '+it.im+'/5</p></div>'
+        +'</article>';
+    }
+    document.getElementById("rlist").innerHTML=h;
+  }
+
+  function select(code){
+    var items=document.querySelectorAll(".ritem");
+    for(var i=0;i<items.length;i++){
+      items[i].classList.toggle("on",items[i].getAttribute("data-code")===code);
+    }
+    var dots=document.querySelectorAll(".rdot");
+    for(var j=0;j<dots.length;j++){
+      dots[j].setAttribute("opacity",dots[j].getAttribute("data-code")===code?"1":"0.55");
+    }
+    var el=document.querySelector('.ritem[data-code="'+code+'"]');
+    if(el && window.innerWidth>1040){ el.scrollIntoView({block:"nearest",behavior:"smooth"}); }
+  }
+
+  drawHeat(); drawList();
+
+  document.getElementById("heat").addEventListener("click",function(e){
+    var g=e.target.closest(".rdot"); if(g)select(g.getAttribute("data-code"));
+  });
+  document.getElementById("heat").addEventListener("keydown",function(e){
+    if(e.key!=="Enter"&&e.key!==" ")return;
+    var g=e.target.closest(".rdot"); if(g){e.preventDefault();select(g.getAttribute("data-code"));}
+  });
+  document.getElementById("rlist").addEventListener("click",function(e){
+    var a=e.target.closest(".ritem"); if(a)select(a.getAttribute("data-code"));
+  });
+  document.getElementById("rlist").addEventListener("keydown",function(e){
+    if(e.key!=="Enter"&&e.key!==" ")return;
+    var a=e.target.closest(".ritem"); if(a){e.preventDefault();select(a.getAttribute("data-code"));}
+  });
+
+  select("R1");
+})();
+</script>
+
+</body>
+</html>
